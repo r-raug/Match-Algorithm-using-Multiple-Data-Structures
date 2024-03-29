@@ -1,20 +1,34 @@
 package QueueNode;
 
+/**
+ * Represents a queue implemented using linked nodes.
+ */
 public class QueueNode {
     private Node head;
     private Node tail;
     private int size;
 
+    /**
+     * Constructs an empty queue.
+     */
     public QueueNode(){
         head = null;
         tail = null;
         size = 0 ;
     }
 
+    /**
+     * Checks if the queue is empty.
+     * @return true if the queue is empty, false otherwise
+     */
     public boolean isEmpty(){
         return head==null;
     }
 
+    /**
+     * Adds an element to the end of the queue.
+     * @param element the element to be added to the queue
+     */
     public void enqueue(int element){
         Node temp = new Node(element);
         if(isEmpty()){
@@ -27,6 +41,9 @@ public class QueueNode {
         size++;
     }
 
+    /**
+     * Removes the element at the front of the queue.
+     */
     public void dequeue(){
         if(isEmpty()){
             System.out.println("Nothing to delete...");
@@ -41,6 +58,9 @@ public class QueueNode {
         size --;
     }
 
+    /**
+     * Displays the elements of the queue.
+     */
     public void displayElements(){
         if(isEmpty()){
             System.out.println("The queue is empty.");
@@ -52,6 +72,10 @@ public class QueueNode {
         System.out.println();
     }
 
+    /**
+     * Retrieves the size of the queue.
+     * @return the size of the queue
+     */
     public int getSize(){
         return size;
     }
