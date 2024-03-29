@@ -3,7 +3,6 @@ package QueueNode;
 public class Node {
 
     private int data;
-
     private Node next;
 
     public void setData(int data) {
@@ -25,5 +24,9 @@ public class Node {
     public Node(int data){
         this.data  = data;
         this.next = null;
+    }
+
+    public String toString() {
+        return "Node{" + "data=" + data +", next=" + next +'}';
     }
 }
