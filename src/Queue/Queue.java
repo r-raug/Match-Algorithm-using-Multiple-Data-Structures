@@ -1,5 +1,6 @@
 package Queue;
 
+import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.List;
 
@@ -125,7 +126,7 @@ public class Queue<T> {
      */
     public void displayQueue() {
         if (isEmpty()) {
-            System.out.println("Queue.Queue is empty.");
+            System.out.println("Queue is empty.");
         } else {
             for (int i = front; i != rear; i = (i + 1) % queue.length) {
                 System.out.print(queue[i] + " ");
@@ -133,4 +134,57 @@ public class Queue<T> {
             System.out.println(queue[rear]);
         }
     }
+
+
+    /**
+     * Finds the position of an item in the queue.
+     * @param item the item to find the position of
+     * @return the position of the item in the queue, or -1 if the item is not found
+     */
+    public int find(T item) {
+        if (isEmpty()) {
+            System.out.println("Queue.Queue is empty.");
+            return -1;
+        }
+        for (int i = front; i != rear; i = (i + 1) % queue.length) {
+            if (queue[i].equals(item)) {
+                return i;
+            }
+        }
+        if (queue[rear].equals(item)) {
+            return rear;
+        }
+        return -1;
+    }
+
+    public void insertionSort() {
+        if (isEmpty()) {
+            System.out.println("Cannot sort an empty queue.");
+            return;
+        }
+
+        for (int i = 1; i < size; i++) {
+            T key = queue[i];
+            int j = i - 1;
+
+            while (j >= 0 && ((Comparable) queue[j]).compareTo(key) > 0) {
+                queue[j + 1] = queue[j];
+                j = j - 1;
+            }
+            queue[j + 1] = key;
+        }
+        System.out.println("Queue sorted successfully.");
+    }
+
+    public void displayElement(T element){
+        var item = find(element);
+        if( item == - 1){
+            System.out.println("Element not found.");
+        }else{
+            System.out.printf("The element {element} is on the index {item}.",element, item);
+        }
+    }
+
+
+
 }
