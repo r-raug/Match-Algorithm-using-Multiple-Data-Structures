@@ -1,6 +1,6 @@
 package Queue;
 
-import java.sql.SQLOutput;
+//import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.List;
 
@@ -169,7 +169,7 @@ public class Queue<T> {
 
             while (j >= 0 && ((Comparable) queue[j]).compareTo(key) > 0) {
                 queue[j + 1] = queue[j];
-                j = j - 1;
+                j--;
             }
             queue[j + 1] = key;
         }

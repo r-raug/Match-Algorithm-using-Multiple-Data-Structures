@@ -21,7 +21,7 @@ public class NodeGeneric <T> {
      * Sets the reference to the next node.
      * @param next the next node
      */
-    public void setNext(NodeGeneric next) {
+    public void setNext(NodeGeneric<T> next) {
         this.next = next;
     }
 
@@ -37,7 +37,7 @@ public class NodeGeneric <T> {
      * Retrieves the reference to the next node.
      * @return the reference to the next node
      */
-    public NodeGeneric getNext() {
+    public NodeGeneric<T> getNext() {
         return next;
     }
 
