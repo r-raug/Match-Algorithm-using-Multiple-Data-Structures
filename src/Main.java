@@ -1,5 +1,6 @@
 import Queue.Queue;
 import QueueNode.QueueNode;
+import QueueNode.QueueNodeGeneric;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +38,28 @@ public class Main {
         node.displayElements();
         System.out.println(node.getSize());
         node.dequeue();
+
+
+        System.out.println("Those output are from a generic class");
+
+        QueueNodeGeneric nodeGeneric = new QueueNodeGeneric();
+
+        nodeGeneric.displayElements();
+        nodeGeneric.enqueue(15);
+        nodeGeneric.displayElements();
+        nodeGeneric.enqueue(22);
+        nodeGeneric.enqueue(35);
+        nodeGeneric.enqueue(12);
+        nodeGeneric.displayElements();
+        nodeGeneric.dequeue();
+        nodeGeneric.displayElements();
+        System.out.println(nodeGeneric.getSize());
+        nodeGeneric.dequeue();
+        nodeGeneric.dequeue();
+        nodeGeneric.dequeue();
+        nodeGeneric.displayElements();
+        System.out.println(nodeGeneric.getSize());
+        nodeGeneric.dequeue();
 
     }
 }
