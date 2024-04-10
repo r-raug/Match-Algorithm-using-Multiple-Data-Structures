@@ -18,7 +18,7 @@ public class CompareDate {
      */
     public static int isOlder(String currentDate, String newDate) {
         // Create date formatters
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         // Parse the dates into LocalDate objects
         LocalDate currentDateObj = LocalDate.parse(currentDate, formatter);
