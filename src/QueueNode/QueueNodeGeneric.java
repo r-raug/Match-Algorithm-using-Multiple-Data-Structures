@@ -4,8 +4,8 @@ package QueueNode;
  * Represents a queue implemented using linked nodes.
  */
 public class QueueNodeGeneric <T>{
-    private NodeGeneric head;
-    private NodeGeneric tail;
+    private NodeGeneric<T> head;
+    private NodeGeneric<T> tail;
     private int size;
 
     /**
@@ -66,7 +66,7 @@ public class QueueNodeGeneric <T>{
             System.out.println("The queue is empty.");
             return;
         }
-        for(NodeGeneric current = head; current != null; current = current.getNext()){
+        for(NodeGeneric<T> current = head; current != null; current = current.getNext()){
             System.out.print(current.getData() + " ");
         }
         System.out.println();
