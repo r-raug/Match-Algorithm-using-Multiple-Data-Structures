@@ -61,5 +61,6 @@ public class Main {
         System.out.println(nodeGeneric.getSize());
         nodeGeneric.dequeue();
 
+        
     }
 }
