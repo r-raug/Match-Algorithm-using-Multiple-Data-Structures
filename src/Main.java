@@ -1,9 +1,9 @@
-import Queue.Queue;
-import QueueNode.QueueNode;
-import QueueNode.QueueNodeGeneric;
-
 import java.util.Arrays;
 import java.util.List;
+
+import DataStructure.Queue;
+import DataStructure.QueueNode;
+import DataStructure.QueueNodeGeneric;
 
 public class Main {
     public static void main(String[] args) {

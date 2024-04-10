@@ -1,4 +1,4 @@
-package QueueNode;
+package DataStructure;
 
 /**
  * Represents a queue implemented using linked nodes.

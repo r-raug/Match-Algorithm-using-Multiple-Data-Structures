@@ -1,4 +1,4 @@
-package Classes;
+package Model;
 
 public class Courses {
 
@@ -8,6 +8,6 @@ public class Courses {
     private short numberOfHours;
     private short numOfGroups;
 
-    
+
 
 }

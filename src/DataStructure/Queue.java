@@ -1,4 +1,4 @@
-package Queue;
+package DataStructure;
 
 //import java.sql.SQLOutput;
 import java.util.Arrays;
