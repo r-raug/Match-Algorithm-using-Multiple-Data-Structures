@@ -6,7 +6,7 @@ package DataStructure;
 public class QueueNodeGeneric <T>{
     private NodeGeneric<T> head;
     private NodeGeneric<T> tail;
-    private int size;
+    private short size;
 
     /**
      * Constructs an empty queue.
@@ -76,7 +76,7 @@ public class QueueNodeGeneric <T>{
      * Retrieves the size of the queue.
      * @return the size of the queue
      */
-    public int getSize(){
+    public short getSize(){
         return size;
     }
 
