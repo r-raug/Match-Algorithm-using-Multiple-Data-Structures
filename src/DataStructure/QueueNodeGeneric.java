@@ -4,9 +4,9 @@ package DataStructure;
  * Represents a queue implemented using linked nodes.
  */
 public class QueueNodeGeneric <T>{
-    private NodeGeneric<T> head;
-    private NodeGeneric<T> tail;
-    private short size;
+    protected NodeGeneric<T> head;
+    protected NodeGeneric<T> tail;
+    protected short size;
 
     /**
      * Constructs an empty queue.
