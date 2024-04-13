@@ -1,8 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import DataStructure.Queue;
 import DataStructure.QueueNode;
@@ -18,28 +20,29 @@ public class Main {
         
         // Creat list of departments.
         typeOfFile = "department";
-        readFile("src/Files/department.txt", typeOfFile);
+        //readFile("src/Files/department.txt", typeOfFile);
 
         // add a list of courses to an department.
         typeOfFile = "course";
-        readFile("src/Files/courses_f22.txt", typeOfFile);
+        //readFile("src/Files/courses_f22.txt", typeOfFile);
 
         // add a set of courses to the professor list.
         typeOfFile = "selection";
-        readFile("src/Files/5999_selection.txt", typeOfFile);
+        //readFile("src/Files/5999_selection.txt", typeOfFile);
 
     }
 
       
 
-    public static void readFile(String pathfile, String type){
+    public static void readFile(String pathFile, String type){
 
         try {
-            File professorFile = new File(pathfile);
+            File professorFile = new File(pathFile);
             Scanner scanner = new Scanner(professorFile);
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
+                System.out.println("Linha sendo lida, antes do processamento:");
                 System.out.println(line);
 
                
@@ -61,10 +64,42 @@ public class Main {
 
     public static void addProfessors(String line){
         // read the line and create an professor instance
+
+        // initialize all the variables necessary to create a new instance of professor
+        int id;              
+        String lastName;
+        String firstName;
+        float seniority;    
+        String hiringDate;
+        Set<String> setOfDisciplines = new HashSet<>();
+        
+        // create an array of strings.
+        String[] fields = line.split(":");
+
+        // Put each part of the string in the correct variable.
+        id = Integer.parseInt(fields[0]);
+        String[] name = fields[1].split(" ");
+        lastName = name[0];
+        firstName = name[1];
+        seniority = Float.parseFloat(fields[2]);
+        hiringDate = fields[3];
+        String[] disciplines = fields[4].split(",");
+            for (String discipline : disciplines) {
+                setOfDisciplines.add(discipline);
+            }
+        Professors newProfessor = new Professors(id, lastName, firstName, seniority, hiringDate, setOfDisciplines);
+
+        System.out.println("Função ToString:");
+        System.out.println(newProfessor.toString());
+
     }
 
     public static void addCourse(String line){
         // read the line and create an course instance
+    }
+
+    public static void separete(String line){
+
     }
 
    
