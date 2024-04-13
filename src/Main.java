@@ -35,6 +35,12 @@ public class Main {
         // add a set of courses to the professor list.
         typeOfFile = "selection";
         //readFile("src/Files/5999_selection.txt", typeOfFile);
+        QueuePriority myList = new QueuePriority();
+        for(int i = 0; i < professorsLists.size();i++){
+            myList.enqueue(professorsLists.get(i));
+        }
+        myList.displayQueue();
+
 
     }
 
@@ -129,6 +135,7 @@ public class Main {
         System.out.println(node.getSize());
         node.dequeue();
 */
+
 
 
         

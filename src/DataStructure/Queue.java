@@ -8,7 +8,7 @@ import java.util.List;
  * Represents a generic queue implemented using an array.
  * @param <T> the type of elements stored in the queue
  */
-public class Queue<T extends Comparable<T>> {
+public class Queue<T>{
     int size;
    // int front;
    // int rear;
@@ -21,7 +21,7 @@ public class Queue<T extends Comparable<T>> {
         //front = -1;
         //rear = -1;
         size = 0;
-        queue = (T[]) new Object[20];
+        queue = (T[]) new Comparable[20];
     }
 
     /**
@@ -32,7 +32,7 @@ public class Queue<T extends Comparable<T>> {
         size = list.size();
         //front = 0;
         //rear = size - 1;
-        queue = (T[]) new Object[size * 2];
+        queue = (T[]) new Comparable[size * 2];
         int i = 0;
         for (T item : list) {
             this.queue[i++] = item;
@@ -125,7 +125,7 @@ public class Queue<T extends Comparable<T>> {
         if (isEmpty()) {
             return 0;
         }
-        System.out.println("The size is: " + size);
+        System.out.println("The size is: " + (size - 1));
         return size;
     }
 
@@ -163,7 +163,7 @@ public class Queue<T extends Comparable<T>> {
 //            System.out.println(queue[rear]);
 //        }
         }else{
-            for(int i = 0; i < size -1; i++){
+            for(int i = 0; i < size ; i++){
                 System.out.print(queue[i] + " ");
             }
             System.out.println("");
