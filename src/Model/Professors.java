@@ -128,5 +128,21 @@ public class Professors {
         return compare.compareProfessors(this, other);
     }
 
+    
+
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ID: ").append(id).append("\n");
+        sb.append("Last Name: ").append(lastName).append("\n");
+        sb.append("First Name: ").append(firstName).append("\n");
+        sb.append("Seniority: ").append(seniority).append("\n");
+        sb.append("Hiring Date: ").append(hiringDate).append("\n");
+        sb.append("Set of Disciplines: ").append(setOfDisciplines).append("\n");
+        sb.append("List of Affected Courses: ").append(listOfAffectedCourses).append("\n");
+        return sb.toString();
+    }
+
 }
 
