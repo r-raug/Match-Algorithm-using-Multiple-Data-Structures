@@ -5,10 +5,11 @@ package Model;
  */
 public class Courses {
 
-    private int id;                 // The course ID
+    private String id;                 // The course ID
     private String title;           // The course title
     private String discipline;      // The course discipline
     private short numberOfHours;    // The number of hours for the course
+    private String prerequisite;                                                 /// implementar esse aqui.
     private short numOfGroups;      // The number of groups for the course
 
     /**
@@ -20,7 +21,7 @@ public class Courses {
      * @param numberOfHours The number of hours for the course.
      * @param numOfGroups   The number of groups for the course.
      */
-    public Courses(int id, String title, String discipline, short numberOfHours, short numOfGroups){
+    public Courses(String id, String title, String discipline, short numberOfHours, short numOfGroups){
         this.id = id;
         this.title = title;
         this.discipline = discipline;

@@ -3,4 +3,4 @@
 420AP1AS: Algorithms & Programming: IN3: 90: none : 5
 420LS3AS: Scripting Languages: IN4: 60: 420AP1AS : 3
 420CT2AS: Object Oriented Programming: IN4 : 90 : 420AP1AS : 4
-420TT4AS: Trends and Technlogies : IN4 : 60 : 420AS2AS, 420CT2AS : 4
+420TT4AS: Trends and Technologies : IN4 : 60 : 420AS2AS, 420CT2AS : 4

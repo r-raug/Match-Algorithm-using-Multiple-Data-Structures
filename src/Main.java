@@ -92,10 +92,6 @@ public class Main {
         return newProfessor;
     }
 
-    public static void separate(String line){
-
-    }
-
     public static void addCourse(String line){
         // read the line and create an course instance
     }
