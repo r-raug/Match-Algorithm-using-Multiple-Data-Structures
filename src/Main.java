@@ -12,15 +12,27 @@ import Model.Professors;
 public class Main {
     public static void main(String[] args) {
 
-        readFile("src/Files/profs.txt");
-        readFile("src/Files/courses_f22.txt");
-        readFile("src/Files/5999_selection.txt");
+        // Create the list of Professors in priority order.
+        String typeOfFile = "professors";
+        readFile("src/Files/profs.txt", typeOfFile);
+        
+        // Creat list of departments.
+        typeOfFile = "department";
+        readFile("src/Files/department.txt", typeOfFile);
+
+        // add a list of courses to an department.
+        typeOfFile = "course";
+        readFile("src/Files/courses_f22.txt", typeOfFile);
+
+        // add a set of courses to the professor list.
+        typeOfFile = "selection";
+        readFile("src/Files/5999_selection.txt", typeOfFile);
 
     }
 
       
 
-    public static void readFile(String pathfile){
+    public static void readFile(String pathfile, String type){
 
         try {
             File professorFile = new File(pathfile);
@@ -29,17 +41,34 @@ public class Main {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 System.out.println(line);
+
+               
+                if (type == "professors"){
+                    addProfessors(line);
+                }
+                if (type == "course"){
+                    addCourse(line);
+                }
+                
+
             }
 
             scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("Professor file not found: " + e.getMessage());
         }
-    
     }    
 
+    public static void addProfessors(String line){
+        // read the line and create an professor instance
+    }
 
-    
+    public static void addCourse(String line){
+        // read the line and create an course instance
+    }
+
+   
+
 
    //     List<Integer> myList = Arrays.asList(10,20,30,50,22);
 
