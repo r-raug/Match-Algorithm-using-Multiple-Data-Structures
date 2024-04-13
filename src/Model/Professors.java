@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 import auxiliaryStructure.compareProfessorsClass;
 
-public class Professors {
+public class Professors implements Comparable<Professors> {
 
     private int id;              // 4 digits
     private String lastName;
@@ -121,7 +121,7 @@ public class Professors {
     }
 
    
-    public short compareTo (Professors other) {
+    public int compareTo (Professors other) {
         
         compareProfessorsClass compare = new compareProfessorsClass ();
 
