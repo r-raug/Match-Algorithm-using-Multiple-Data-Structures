@@ -1,15 +1,40 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 import DataStructure.Queue;
 import DataStructure.QueueNode;
 import DataStructure.QueueNodeGeneric;
+import DataStructure.PriorityQueue;
+import Model.Professors;
 
 public class Main {
     public static void main(String[] args) {
-        List<Integer> myList = Arrays.asList(10,20,30,50,22);
 
-        Queue<Integer> myQueue = new Queue<>(myList);
+        String pathfile = "Files/profs.txt";
+
+        try {
+            File professorFile = new File(pathfile);
+            Scanner scanner = new Scanner(professorFile);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                System.out.println(line);
+            }
+
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Professor file not found: " + e.getMessage());
+        }
+
+        
+
+
+   //     List<Integer> myList = Arrays.asList(10,20,30,50,22);
+
+   //     Queue<Integer> myQueue = new Queue<>(myList);
 
 //        myQueue.displayQueue();
 //        myQueue.enqueue(38);
@@ -19,7 +44,7 @@ public class Main {
 //        myQueue.enqueue(36);
 //        myQueue.displayQueue();
 //        myQueue.getSize();
-
+/* 
         QueueNode node = new QueueNode();
 
         node.displayElements();
@@ -38,29 +63,11 @@ public class Main {
         node.displayElements();
         System.out.println(node.getSize());
         node.dequeue();
+*/
 
-
-        System.out.println("Those output are from a generic class");
-
-        QueueNodeGeneric nodeGeneric = new QueueNodeGeneric();
-
-        nodeGeneric.displayElements();
-        nodeGeneric.enqueue(15);
-        nodeGeneric.displayElements();
-        nodeGeneric.enqueue(22);
-        nodeGeneric.enqueue(35);
-        nodeGeneric.enqueue(12);
-        nodeGeneric.displayElements();
-        nodeGeneric.dequeue();
-        nodeGeneric.displayElements();
-        System.out.println(nodeGeneric.getSize());
-        nodeGeneric.dequeue();
-        nodeGeneric.dequeue();
-        nodeGeneric.dequeue();
-        nodeGeneric.displayElements();
-        System.out.println(nodeGeneric.getSize());
-        nodeGeneric.dequeue();
 
         
+    
+
     }
 }

@@ -11,7 +11,7 @@ public class Professors {
     private String firstName;
     private float seniority;    // 0,00 - 60,00
     private String hiringDate;  // dd-mm-yyyy date format
-    private Set<String> setOfDiciplines;
+    private Set<String> setOfDisciplines;
     private List<Courses> listOfAffectedCourses;
 
 
@@ -32,7 +32,7 @@ public class Professors {
         this.firstName = firstName;
         this.seniority = seniority;
         this.hiringDate = hiringDate;
-        this.setOfDiciplines = setOfDisciplines;
+        this.setOfDisciplines = setOfDisciplines;
         this.listOfAffectedCourses = null;
     }
 
@@ -47,7 +47,7 @@ public class Professors {
         this.firstName = professorToCopy.firstName;
         this.seniority = professorToCopy.seniority;
         this.hiringDate = professorToCopy.hiringDate;
-        this.setOfDiciplines = professorToCopy.setOfDiciplines;
+        this.setOfDisciplines = professorToCopy.setOfDisciplines;
     }
 
     //  int id
@@ -102,12 +102,12 @@ public class Professors {
 
     // Set<String> setOfDiciplines;
 
-    public Set<String> getSetOfDiciplines() {
-        return setOfDiciplines;
+    public Set<String> getSetOfDisciplines() {
+        return setOfDisciplines;
     }
 
-    public void setSetOfDiciplines(Set<String> setOfDiciplines) {
-        this.setOfDiciplines = setOfDiciplines;
+    public void setSetOfDisciplines(Set<String> setOfDiciplines) {
+        this.setOfDisciplines = setOfDiciplines;
     }
 
     // List<Courses>
