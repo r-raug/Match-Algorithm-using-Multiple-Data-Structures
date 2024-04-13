@@ -7,13 +7,20 @@ import java.util.Scanner;
 import DataStructure.Queue;
 import DataStructure.QueueNode;
 import DataStructure.QueueNodeGeneric;
-import DataStructure.PriorityQueue;
 import Model.Professors;
 
 public class Main {
     public static void main(String[] args) {
 
-        String pathfile = "Files/profs.txt";
+        readFile("src/Files/profs.txt");
+        readFile("src/Files/courses_f22.txt");
+        readFile("src/Files/5999_selection.txt");
+
+    }
+
+      
+
+    public static void readFile(String pathfile){
 
         try {
             File professorFile = new File(pathfile);
@@ -28,9 +35,11 @@ public class Main {
         } catch (FileNotFoundException e) {
             System.out.println("Professor file not found: " + e.getMessage());
         }
+    
+    }    
 
-        
 
+    
 
    //     List<Integer> myList = Arrays.asList(10,20,30,50,22);
 
@@ -68,6 +77,5 @@ public class Main {
 
         
     
-
-    }
+    
 }
