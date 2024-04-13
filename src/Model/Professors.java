@@ -141,6 +141,7 @@ public class Professors implements Comparable<Professors> {
         sb.append("Hiring Date: ").append(hiringDate).append("\n");
         sb.append("Set of Disciplines: ").append(setOfDisciplines).append("\n");
         sb.append("List of Affected Courses: ").append(listOfAffectedCourses).append("\n");
+        sb.append("\n");
         return sb.toString();
     }
 

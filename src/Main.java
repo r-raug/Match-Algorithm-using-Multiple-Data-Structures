@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -13,13 +14,17 @@ import DataStructure.QueuePriority;
 import Model.Professors;
 
 public class Main {
+
+    
+
     public static void main(String[] args) {
 
         // Create the list of Professors in priority order.
         String typeOfFile = "professors";
-        readFile("src/Files/profs.txt", typeOfFile);
+        List<Professors> professorsLists = new ArrayList<>(); 
+        readFile("src/Files/profs.txt", typeOfFile, professorsLists);
         
-        // Creat list of departments.
+        // create list of departments.
         typeOfFile = "department";
         //readFile("src/Files/department.txt", typeOfFile);
 
@@ -35,42 +40,30 @@ public class Main {
 
       
 
-    public static void readFile(String pathFile, String type){
-
-        if (type == "professor"){
-
-            QueuePriority<Professors> priorityProfessorList = new QueuePriority<Professors>();
-        }
-        
+    public static void readFile(String pathFile, String type, List<Professors> profLists){
 
         try {
             File professorFile = new File(pathFile);
             Scanner scanner = new Scanner(professorFile);
-
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-
-                if (type == "professors"){
-
-                    
-                    //addProfessors(line));
-                    
-        
+                if (type.equals("professors")){
+                    Professors professor = addProfessors(line);
+                    profLists.add(professor);
                 }
-                if (type == "course"){
+                if (type.equals("course")){
                     addCourse(line);
                 }
-                
-
             }
+
 
             scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("Professor file not found: " + e.getMessage());
         }
     }    
-
-    public Professors addProfessors(String line){
+   
+    public static Professors addProfessors(String line){
         // read the line and create an professor instance
 
         // initialize all the variables necessary to create a new instance of professor
@@ -99,15 +92,13 @@ public class Main {
         return newProfessor;
     }
 
+    public static void separate(String line){
+
+    }
+
     public static void addCourse(String line){
         // read the line and create an course instance
     }
-
-    public static void separete(String line){
-
-    }
-
-   
 
 
    //     List<Integer> myList = Arrays.asList(10,20,30,50,22);
