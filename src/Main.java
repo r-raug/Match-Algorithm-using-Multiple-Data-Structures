@@ -9,6 +9,7 @@ import java.util.Set;
 import DataStructure.Queue;
 import DataStructure.QueueNode;
 import DataStructure.QueueNodeGeneric;
+import DataStructure.QueuePriority;
 import Model.Professors;
 
 public class Main {
@@ -36,18 +37,25 @@ public class Main {
 
     public static void readFile(String pathFile, String type){
 
+        if (type == "professor"){
+
+            QueuePriority<Professors> priorityProfessorList = new QueuePriority<Professors>();
+        }
+        
+
         try {
             File professorFile = new File(pathFile);
             Scanner scanner = new Scanner(professorFile);
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                System.out.println("Linha sendo lida, antes do processamento:");
-                System.out.println(line);
 
-               
                 if (type == "professors"){
-                    addProfessors(line);
+
+                    
+                    //addProfessors(line));
+                    
+        
                 }
                 if (type == "course"){
                     addCourse(line);
@@ -62,7 +70,7 @@ public class Main {
         }
     }    
 
-    public static void addProfessors(String line){
+    public Professors addProfessors(String line){
         // read the line and create an professor instance
 
         // initialize all the variables necessary to create a new instance of professor
@@ -88,10 +96,7 @@ public class Main {
                 setOfDisciplines.add(discipline);
             }
         Professors newProfessor = new Professors(id, lastName, firstName, seniority, hiringDate, setOfDisciplines);
-
-        System.out.println("Função ToString:");
-        System.out.println(newProfessor.toString());
-
+        return newProfessor;
     }
 
     public static void addCourse(String line){
