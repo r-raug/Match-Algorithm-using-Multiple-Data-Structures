@@ -12,12 +12,17 @@ public class Departments {
     private List<Professors> listOfProfs;
     private Map<String, Courses> courseMap;
 
+    public Departments(List<Professors> listOfProfs) {
+        this.listOfProfs = listOfProfs;
+        this.courseMap = new HashMap<>();
+    }
+
     public Map<String, Courses> getCourseMap() {
         return courseMap;
     }
 
-    public void setCourseMap(Map<String, Courses> courseMap) {
-        this.courseMap = courseMap;
+    public void setCourseMap(Courses newCourse) {
+        this.courseMap.put(newCourse.getId(), newCourse);
     }
 
     public List<Professors> getListOfProfs() {
@@ -28,10 +33,9 @@ public class Departments {
         this.listOfProfs = listOfProfs;
     }
 
-    public Departments(List<Professors> listOfProfs) {
-        this.listOfProfs = listOfProfs;
-        this.courseMap = new HashMap<>();
-    }
+
+
+    
 
    
 
