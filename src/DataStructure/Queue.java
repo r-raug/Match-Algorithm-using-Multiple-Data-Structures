@@ -1,25 +1,25 @@
 package DataStructure;
+import auxiliaryStructure.compareProfessorsClass;
 
-//import java.sql.SQLOutput;
-//import java.util.Arrays;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Represents a generic queue implemented using an array.
  * @param <T> the type of elements stored in the queue
  */
-public class Queue<T>{
+public class Queue<T extends Comparable<T>>{
     int size;
-   // int front;
-   // int rear;
+    int front;
+    int rear;
     T[] queue;
 
     /**
      * Constructs an empty queue with a default capacity of 20.
      */
     public Queue() {
-        //front = -1;
-        //rear = -1;
+        front = 0;
+        rear = -1;
         size = 0;
         queue = (T[]) new Comparable[20];
     }
@@ -30,8 +30,8 @@ public class Queue<T>{
      */
     public Queue(List<T> list) {
         size = list.size();
-        //front = 0;
-        //rear = size - 1;
+        front = 0;
+        rear = size - 1;
         queue = (T[]) new Comparable[size * 2];
         int i = 0;
         for (T item : list) {
@@ -63,30 +63,10 @@ public class Queue<T>{
     public void enqueue(T item) {
         if (isFull()) {
             resize();
-        }else {
-            //if (!isEmpty()) {
-            //front = 0;
-            //rear = 0;
-            queue[size] = item;
-            size++;
         }
-        //}
-//        } else {
-//            //rear = (rear + 1) % queue.length;
-//            insertionSort();
-//            //var temp = queue[findPosition(item)];
-//            var position = findPosition(item);
-//            queue[findPosition(item)] = item;
-//            for( int i = position + 1 ; i <= rear ; i++){
-//                var temp = queue[i];
-//                queue[i] = temp;
-//                temp = queue[i+1];
-//            }
-
-        //}
-        //queue[rear] = item;
-        //size++;
-        //System.out.println("Element " + item + " is inserted successfully.");
+        rear = (rear + 1) % queue.length;
+        queue[rear] = item;
+        size++;
     }
 
     /**
@@ -98,21 +78,16 @@ public class Queue<T>{
             System.out.println("Queue.Queue is empty.");
             return null;
         } else {
-//            T item = queue[front];
-//            if (front == rear) {
-//                front = -1;
-//                rear = -1;
-//            } else {
-//                front = (front + 1) % size;
-//            }
-//            size--;
-//            return item;
-            T item = queue[0];
-            for(int i = 0; i < size -1; i++){
-                queue[i] = queue[i+1];
+            T item = queue[front];
+            if (front == rear) {
+                front = -1;
+                rear = -1;
+            } else {
+                front = (front + 1) % size;
             }
-            size --;
-            return item ;
+            size--;
+            return item;
+
         }
 
     }
@@ -133,21 +108,14 @@ public class Queue<T>{
      * Resizes the internal array of the queue to accommodate more elements.
      */
     public void resize() {
-//        int temp = size * 2;
-//        T[] tempQueue = Arrays.copyOf(queue, temp);
-//        for (int i = 0; i < size; i++) {
-//            tempQueue[i] = queue[(front + i) % queue.length];
-//        }
-//        queue = tempQueue;
-//        front = 0;
-//        rear = size - 1;
-        T[] temp = (T[])(new Object[queue.length * 2]);
-        for( int i = 0 ; i < queue.length; i++){
-            temp[i] = queue[i];
+        int temp = size * 2;
+        T[] tempQueue = Arrays.copyOf(queue, temp);
+        for (int i = 0; i < size; i++) {
+            tempQueue[i] = queue[(front + i) % queue.length];
         }
-        queue = temp;
-
-
+        queue = tempQueue;
+        front = 0;
+        rear = size - 1;
     }
 
     /**
@@ -156,25 +124,11 @@ public class Queue<T>{
     public void displayQueue() {
         if (isEmpty()) {
             System.out.println("Queue is empty.");
-//        } else {
-//            for (int i = front; i != rear; i = (i + 1) % queue.length) {
-//                System.out.print(queue[i] + " ");
-//            }
-//            System.out.println(queue[rear]);
-//        }
-        }else{
-            for(int i = 0; i < size ; i++){
+        } else {
+            for (int i = front; i != rear; i = (i + 1) % queue.length) {
                 System.out.print(queue[i] + " ");
             }
-            System.out.println("");
+            System.out.println(queue[rear]);
         }
     }
-
-
-
-
-
-
-
-
 }
