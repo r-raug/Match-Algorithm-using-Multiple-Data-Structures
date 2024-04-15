@@ -11,6 +11,7 @@ import DataStructure.Queue;
 import DataStructure.QueueNode;
 import DataStructure.QueueNodeGeneric;
 import DataStructure.QueuePriority;
+import Model.Courses;
 import Model.Departments;
 import Model.Professors;
 
@@ -23,14 +24,15 @@ public class Main {
         // Create the list of Professors in priority order.
         String typeOfFile = "professors";
         List<Professors> listOfProfs = new ArrayList<>(); 
-        readFile("src/Files/profs.txt", typeOfFile, listOfProfs);     
+        readFile("src/Files/profs.txt", typeOfFile, (List<Professors>) listOfProfs);  
+        // add the listOfProfs to the QueuePriority list... implement it.   
 
         Departments computerScienceDepartment = new Departments(listOfProfs);
         
-
-        // add a list of courses to an department.
+        // Create a list of courses.
         typeOfFile = "course";
-        //readFile("src/Files/courses_f22.txt", typeOfFile);
+        List<Courses> listOfCourses = new ArrayList<>();
+        readFile("src/Files/courses_f22.txt", typeOfFile, (List<Courses>) listOfCourses);
 
         // add a set of courses to the professor list.
         typeOfFile = "selection";
@@ -46,7 +48,7 @@ public class Main {
 
       
 
-    public static void readFile(String pathFile, String type, List<Professors> profLists){
+    public static <T> void readFile(String pathFile, String type, List<T> ListOfSomething){
 
         try {
             File professorFile = new File(pathFile);
@@ -55,7 +57,7 @@ public class Main {
                 String line = scanner.nextLine();
                 if (type.equals("professors")){
                     Professors professor = addProfessors(line);
-                    profLists.add(professor);
+                    ListOfSomething.add((Professors) professor);    //  Resolver a questão do tipo, enviando apenas a lista como argumento.
                 }
                 if (type.equals("course")){
                     addCourse(line);
@@ -102,43 +104,4 @@ public class Main {
         // read the line and create an course instance
     }
 
-
-   //     List<Integer> myList = Arrays.asList(10,20,30,50,22);
-
-   //     Queue<Integer> myQueue = new Queue<>(myList);
-
-//        myQueue.displayQueue();
-//        myQueue.enqueue(38);
-//        myQueue.displayQueue();
-//        myQueue.dequeue();
-//        myQueue.enqueue(39);
-//        myQueue.enqueue(36);
-//        myQueue.displayQueue();
-//        myQueue.getSize();
-/* 
-        QueueNode node = new QueueNode();
-
-        node.displayElements();
-        node.enqueue(15);
-        node.displayElements();
-        node.enqueue(22);
-        node.enqueue(35);
-        node.enqueue(12);
-        node.displayElements();
-        node.dequeue();
-        node.displayElements();
-        System.out.println(node.getSize());
-        node.dequeue();
-        node.dequeue();
-        node.dequeue();
-        node.displayElements();
-        System.out.println(node.getSize());
-        node.dequeue();
-*/
-
-
-
-        
-    
-    
 }
