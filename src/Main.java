@@ -32,8 +32,30 @@ public class Main {
 
         // A.c
         ReadCourse(computerScienceDepartment);
+
+        // B.a
+        
+        // Start by examining the profProcessingQueue. 
+
+        QueuePriority profProcessingQueue = new QueuePriority();
+
+        // When you receive the first element, use their id to look up their profId_select.txt file. 
+        for (int i = 0; i < listOfProfs1.size(); i++) {
+            profProcessingQueue.enqueue(listOfProfs1.get(i));
+        }
+        // Build the file path by using string concatenation. 
+        for (int i = 0; i < profProcessingQueue.getSize(); i++) {
+            // Aqui a iteração passa por todos os professores, na ordem, e faz as atribuições nas listas ArrayList<Courses> listOfAffectedCourses de cada professor.
+            // chama uma nova função que recebe o professor, lê o id e abre o arquivo dele.
+            // Dentro da leitura, faz a verificação dos requisitos.
+        }
+        // Open the file and read the first line: max requested hours. Subsequent line(s) contain(s) the selection.
+
         
 
+        // Instaciate a new priority list, using the professor list.
+
+        
         
 
         // Create the list of Professors in priority order.
@@ -131,8 +153,6 @@ public class Main {
                 Courses newCourse = new Courses(id, title, discipline, numberOfHours, numOfGroups);
                 department.setCourseMap(newCourse);
             }
-            }
-
 
             scanner.close();
         } catch (FileNotFoundException e) {
@@ -204,8 +224,8 @@ public class Main {
 
         
         // read the line and create an course instance
-    }
-
+    
+/* 
     public static Professors addCourse(){
         // read the line and create an professor instance
 
@@ -235,5 +255,5 @@ public class Main {
         Professors newProfessor = new Professors(id, lastName, firstName, seniority, hiringDate, setOfDisciplines);
         return newProfessor;
     }
-
+*/
 }
