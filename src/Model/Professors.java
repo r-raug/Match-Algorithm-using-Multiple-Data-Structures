@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import auxiliaryStructure.compareProfessorsClass;
@@ -12,7 +14,7 @@ public class Professors implements Comparable<Professors> {
     private float seniority;    // 0,00 - 60,00
     private String hiringDate;  // dd-mm-yyyy date format
     private Set<String> setOfDisciplines;
-    private List<Courses> listOfAffectedCourses;
+    private ArrayList<Courses> listOfAffectedCourses;
 
 
 
@@ -112,11 +114,11 @@ public class Professors implements Comparable<Professors> {
 
     // List<Courses>
 
-    public List<Courses> getListOfAffectedCourses() {
+    public ArrayList<Courses> getListOfAffectedCourses() {
         return listOfAffectedCourses;
     }
 
-    public void setListOfAffectedCourses(List<Courses> listOfAffectedCourses) {
+    public void setListOfAffectedCourses(ArrayList<Courses> listOfAffectedCourses) {
         this.listOfAffectedCourses = listOfAffectedCourses;
     }
 

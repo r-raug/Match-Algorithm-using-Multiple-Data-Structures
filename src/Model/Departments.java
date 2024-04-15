@@ -12,6 +12,22 @@ public class Departments {
     private List<Professors> listOfProfs;
     private Map<String, Courses> courseMap;
 
+    public Map<String, Courses> getCourseMap() {
+        return courseMap;
+    }
+
+    public void setCourseMap(Map<String, Courses> courseMap) {
+        this.courseMap = courseMap;
+    }
+
+    public List<Professors> getListOfProfs() {
+        return listOfProfs;
+    }
+
+    public void setListOfProfs(List<Professors> listOfProfs) {
+        this.listOfProfs = listOfProfs;
+    }
+
     public Departments(List<Professors> listOfProfs) {
         this.listOfProfs = listOfProfs;
         this.courseMap = new HashMap<>();

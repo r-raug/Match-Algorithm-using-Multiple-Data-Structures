@@ -48,4 +48,47 @@ public class Courses {
         this.id = id;
     }
 
+    public String getDiscipline() {
+        return discipline;
+    }
+
+    public void setDiscipline(String discipline) {
+        this.discipline = discipline;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public short getNumberOfHours() {
+        return numberOfHours;
+    }
+
+    public void setNumberOfHours(short numberOfHours) {
+        this.numberOfHours = numberOfHours;
+    }
+
+    public short getNumOfGroups() {
+        return numOfGroups;
+    }
+
+    public void setNumOfGroups(short numOfGroups) {
+        this.numOfGroups = numOfGroups;
+    }
+
+    public String getPrerequisite() {
+        return prerequisite;
+    }
+
+    public void setPrerequisite(String prerequisite) {
+        this.prerequisite = prerequisite;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
