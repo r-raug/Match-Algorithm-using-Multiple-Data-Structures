@@ -23,12 +23,16 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // A.a
         listOfProfs1 = new ArrayList(); 
         readProfs();
 
+        // A.b
         Departments computerScienceDepartment = new Departments(listOfProfs1);
 
+        // A.c
         ReadCourse(computerScienceDepartment);
+        
 
         
 
@@ -125,7 +129,7 @@ public class Main {
                 prerequisite = fields[4];
                 numOfGroups = Short.parseShort(fields[5]);
                 Courses newCourse = new Courses(id, title, discipline, numberOfHours, numOfGroups);
-                department.CourseMap .HashMap(newCourse);
+                department.setCourseMap(newCourse);
             }
             }
 
