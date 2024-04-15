@@ -1,5 +1,5 @@
 package DataStructure;
-import DataStructure.Queue;
+//import DataStructure.Queue;
 
 public class QueuePriority<T> extends Queue<T>{
 

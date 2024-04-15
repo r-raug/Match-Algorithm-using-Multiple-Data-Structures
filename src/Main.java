@@ -1,7 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
@@ -11,6 +11,7 @@ import DataStructure.Queue;
 import DataStructure.QueueNode;
 import DataStructure.QueueNodeGeneric;
 import DataStructure.QueuePriority;
+import Model.Departments;
 import Model.Professors;
 
 public class Main {
@@ -21,12 +22,11 @@ public class Main {
 
         // Create the list of Professors in priority order.
         String typeOfFile = "professors";
-        List<Professors> professorsLists = new ArrayList<>(); 
-        readFile("src/Files/profs.txt", typeOfFile, professorsLists);
+        List<Professors> listOfProfs = new ArrayList<>(); 
+        readFile("src/Files/profs.txt", typeOfFile, listOfProfs);     
+
+        Departments computerScienceDepartment = new Departments(listOfProfs);
         
-        // create list of departments.
-        typeOfFile = "department";
-        //readFile("src/Files/department.txt", typeOfFile);
 
         // add a list of courses to an department.
         typeOfFile = "course";
@@ -36,8 +36,8 @@ public class Main {
         typeOfFile = "selection";
         //readFile("src/Files/5999_selection.txt", typeOfFile);
         QueuePriority myList = new QueuePriority();
-        for(int i = 0; i < professorsLists.size();i++){
-            myList.enqueue(professorsLists.get(i));
+        for(int i = 0; i < listOfProfs.size();i++){
+            myList.enqueue(listOfProfs.get(i));
         }
         myList.displayQueue();
 
