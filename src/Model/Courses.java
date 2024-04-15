@@ -42,4 +42,10 @@ public class Courses {
         this.numOfGroups = CourseToCopy.numOfGroups;
     }
 
+
+    
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }
