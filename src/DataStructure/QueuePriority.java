@@ -81,6 +81,12 @@ public class QueuePriority<T extends Comparable<T>> extends Queue<T>{
         return i;
     }
 
-
+    public T getElement(int index) {
+        if (isEmpty() || index < 0 || index >= size) {
+            System.out.println("Invalid index or queue is empty.");
+            return null;
+        }
+        return queue[index];
+    }
 
 }
