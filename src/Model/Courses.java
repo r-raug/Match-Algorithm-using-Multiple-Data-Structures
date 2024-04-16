@@ -8,9 +8,9 @@ public class Courses {
     private String id;                 // The course ID
     private String title;           // The course title
     private String discipline;      // The course discipline
-    private short numberOfHours;    // The number of hours for the course
+    private int numberOfHours;    // The number of hours for the course
     private String prerequisite;                                                 /// implementar esse aqui.
-    private short numOfGroups;      // The number of groups for the course
+    private int numOfGroups;      // The number of groups for the course
 
     /**
      * Constructs a new Courses object with the specified attributes.
@@ -21,7 +21,7 @@ public class Courses {
      * @param numberOfHours The number of hours for the course.
      * @param numOfGroups   The number of groups for the course.
      */
-    public Courses(String id, String title, String discipline, short numberOfHours, short numOfGroups){
+    public Courses(String id, String title, String discipline, int numberOfHours, int numOfGroups){
         this.id = id;
         this.title = title;
         this.discipline = discipline;
@@ -60,7 +60,7 @@ public class Courses {
         return id;
     }
 
-    public short getNumberOfHours() {
+    public int getNumberOfHours() {
         return numberOfHours;
     }
 
@@ -68,7 +68,7 @@ public class Courses {
         this.numberOfHours = numberOfHours;
     }
 
-    public short getNumOfGroups() {
+    public int getNumOfGroups() {
         return numOfGroups;
     }
 
