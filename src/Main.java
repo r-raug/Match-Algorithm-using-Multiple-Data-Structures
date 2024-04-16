@@ -20,6 +20,7 @@ public class Main {
 
     public static List<Professors> listOfProfs1;
     public static HashMap<String, Courses> courseMap1;
+    public static QueuePriority profProcessingQueue;
 
     public static void main(String[] args) {
 
@@ -37,52 +38,25 @@ public class Main {
         
         // Start by examining the profProcessingQueue. 
 
-        QueuePriority profProcessingQueue = new QueuePriority();
+        profProcessingQueue = new QueuePriority();
 
         // When you receive the first element, use their id to look up their profId_select.txt file. 
         for (int i = 0; i < listOfProfs1.size(); i++) {
             profProcessingQueue.enqueue(listOfProfs1.get(i));
         }
         // Build the file path by using string concatenation. 
-        for (int i = 0; i < profProcessingQueue.getSize(); i++) {
+        for (int i = 0; i < profProcessingQueue.getSize(); i++){
+
+            Professors firstProfessor = (Professors) profProcessingQueue.dequeue();
+            String professorId =  Integer.toString(firstProfessor.getId());
+            ReadProfessorSelection(i);
             // Aqui a iteração passa por todos os professores, na ordem, e faz as atribuições nas listas ArrayList<Courses> listOfAffectedCourses de cada professor.
             // chama uma nova função que recebe o professor, lê o id e abre o arquivo dele.
             // Dentro da leitura, faz a verificação dos requisitos.
         }
         // Open the file and read the first line: max requested hours. Subsequent line(s) contain(s) the selection.
 
-        
-
-        // Instaciate a new priority list, using the professor list.
-
-        
-        
-
-        // Create the list of Professors in priority order.
-        //String typeOfFile = "professors";
-        //List<Professors> listOfProfs = new ArrayList<>(); 
-        //readFile("src/Files/profs.txt", typeOfFile, (List<Professors>) listOfProfs);  
-        // add the listOfProfs to the QueuePriority list... implement it.   
-
-        
-        
-        // Create a list of courses.
-        //typeOfFile = "course";
-        //List<Courses> listOfCourses = new ArrayList<>();
-        //readFile("src/Files/courses_f22.txt", typeOfFile, (List<Courses>) listOfCourses);
-
-        // add a set of courses to the professor list.
-        //typeOfFile = "selection";
-        //readFile("src/Files/5999_selection.txt", typeOfFile);
-
-        /*
-        QueuePriority myList = new QueuePriority();
-        for(int i = 0; i < listOfProfs.size();i++){
-            myList.enqueue(listOfProfs.get(i));
-        }
-        myList.displayQueue();
-
-         */
+       
 
 
     }
@@ -160,6 +134,30 @@ public class Main {
         }
 
     }
+
+    public static void ReadProfessorSelection(String professorId){
+        try {
+            File selectionFile = new File("src/Files/" + professorId + "_selection.txt");
+            Scanner scanner = new Scanner(selectionFile);
+            String line = scanner.nextLine();
+            int maxHour = Integer.parseInt(line);
+            while (scanner.hasNextLine()) {
+                              
+                // create an array of strings.
+                String[] fields = line.split(":");
+        
+               
+                Courses newCourse = new Courses(id, title, discipline, numberOfHours, numOfGroups);
+                department.setCourseMap(newCourse);
+            }
+
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Professor file not found: " + e.getMessage());
+        }
+
+    }
+    
 
     /* 
     public static <T> void readFile(String pathFile, String type, List<T> ListOfSomething){
