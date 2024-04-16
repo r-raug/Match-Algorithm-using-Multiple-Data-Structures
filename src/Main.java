@@ -14,6 +14,8 @@ import DataStructure.QueuePriority;
 import Model.Courses;
 import Model.Departments;
 import Model.Professors;
+import auxiliaryStructure.compareProfessorsClass;
+
 import java.util.HashMap;
 public class Main {
 
@@ -26,29 +28,49 @@ public class Main {
         // A.a
         listOfProfs1 = new ArrayList(); 
         readProfs();
+        String string = listOfProfs1.toString();
+
+        //verificando o que esta dentro do listOfProfs1 #Apenas para mapear o que esta acontecendo
+        System.out.println(string);
 
         // A.b
         Departments computerScienceDepartment = new Departments(listOfProfs1);
 
+
         // A.c
         ReadCourse(computerScienceDepartment);
 
-        // B.a
-        
-        // Start by examining the profProcessingQueue. 
-
-        QueuePriority profProcessingQueue = new QueuePriority();
-
-        // When you receive the first element, use their id to look up their profId_select.txt file. 
-        for (int i = 0; i < listOfProfs1.size(); i++) {
-            profProcessingQueue.enqueue(listOfProfs1.get(i));
+        //verificando os cursos adicionados
+        for (String key : computerScienceDepartment.getCourseMap().keySet()) {
+            System.out.println(key);
         }
+
+
+        // B.a
+
+        // Criar uma instância do comparador personalizado ProfessorsComparator
+        compareProfessorsClass comparator = new compareProfessorsClass();
+
+// Criar uma fila de prioridade com o comparador personalizado
+        QueuePriority<Professors> profProcessingQueue = new QueuePriority<>(comparator);
+
+// Enfileirar os elementos usando a fila de prioridade
+        for (int i = 0; i < listOfProfs1.size(); i++) {
+            Professors currentProfessor = listOfProfs1.get(i);
+            profProcessingQueue.enqueue(currentProfessor);
+        }
+
+        profProcessingQueue.displayQueue();
+
+        System.out.println("XXXXXX");
         // Build the file path by using string concatenation. 
         for (int i = 0; i < profProcessingQueue.getSize(); i++) {
             // Aqui a iteração passa por todos os professores, na ordem, e faz as atribuições nas listas ArrayList<Courses> listOfAffectedCourses de cada professor.
             // chama uma nova função que recebe o professor, lê o id e abre o arquivo dele.
             // Dentro da leitura, faz a verificação dos requisitos.
         }
+
+        System.out.println("XXXXX");
         // Open the file and read the first line: max requested hours. Subsequent line(s) contain(s) the selection.
 
         
@@ -136,20 +158,20 @@ public class Main {
                 String id;                 // The course ID
                 String title;           // The course title
                 String discipline;      // The course discipline
-                short numberOfHours;    // The number of hours for the course
+                int numberOfHours;    // The number of hours for the course
                 String prerequisite;                                                 /// implementar esse aqui.
-                short numOfGroups;
+                int numOfGroups;
                 
                 // create an array of strings.
                 String[] fields = line.split(":");
         
                 // Put each part of the string in the correct variable.
-                id = (fields[0]);
-                title = fields[1];
-                discipline = fields[2];
-                numberOfHours = Short.parseShort(fields[3]);
-                prerequisite = fields[4];
-                numOfGroups = Short.parseShort(fields[5]);
+                id = (fields[0].trim());
+                title = fields[1].trim();
+                discipline = fields[2].trim();
+                numberOfHours = Integer.parseInt(fields[3].trim());
+                prerequisite = fields[4].trim();
+                numOfGroups = Integer.parseInt(fields[5].trim());
                 Courses newCourse = new Courses(id, title, discipline, numberOfHours, numOfGroups);
                 department.setCourseMap(newCourse);
             }

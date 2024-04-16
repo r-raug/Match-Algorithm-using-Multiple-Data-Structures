@@ -5,17 +5,43 @@ package DataStructure;
 import Model.Professors;
 import auxiliaryStructure.compareProfessorsClass;
 
+import java.util.Comparator;
+
 public class QueuePriority<T extends Comparable<T>> extends Queue<T>{
-
-
-    public void enqueue(T item){
+    private Comparator<T> comparator;
+    public QueuePriority(Comparator<T> comparator) {
+        this.comparator = comparator;
+    }
+    public void enqueue(T item) {
+//        if (isFull()) {
+//            resize();
+//        }else {
+//            queue[size] = item;
+//            size++;
+//        }
+//        insertionSort();
         if (isFull()) {
             resize();
-        }else {
-            queue[size] = item;
-            size++;
         }
-        insertionSort();
+
+        if (isEmpty()) {
+            super.enqueue(item);
+        } else if (item == null) {
+            System.out.println("Trying to enqueue a null item.");
+        } else if (comparator.compare(item, queue[front]) < 0) {
+            front = (front - 1 + queue.length) % queue.length;
+            queue[front] = item;
+        } else {
+            int insertIndex = rear;
+            while (insertIndex != front && comparator.compare(item, queue[(insertIndex - 1 + queue.length) % queue.length]) < 0) {
+                queue[insertIndex] = queue[(insertIndex - 1 + queue.length) % queue.length];
+                insertIndex = (insertIndex - 1 + queue.length) % queue.length;
+            }
+            queue[insertIndex] = item;
+            rear = (rear + 1) % queue.length;
+        }
+
+        size++;
     }
 
     private void insertionSort() {
@@ -28,7 +54,7 @@ public class QueuePriority<T extends Comparable<T>> extends Queue<T>{
             T key = queue[i];
             int j = i - 1;
 
-            while (j >= 0 && ((Comparable) queue[j]).compareTo(key) > 0) {
+            while (j >= 0 && comparator.compare(queue[j], key) < 0) {
                 queue[j + 1] = queue[j];
                 j--;
             }
@@ -80,6 +106,7 @@ public class QueuePriority<T extends Comparable<T>> extends Queue<T>{
         }
         return i;
     }
+
 
 
 

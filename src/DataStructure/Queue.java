@@ -125,10 +125,15 @@ public class Queue<T extends Comparable<T>>{
         if (isEmpty()) {
             System.out.println("Queue is empty.");
         } else {
-            for (int i = front; i != rear; i = (i + 1) % queue.length) {
+            int i = front;
+            while (true) {
                 System.out.print(queue[i] + " ");
+                if (i == rear) {
+                    break; // Sai do loop quando i alcança rear
+                }
+                i = (i + 1) % queue.length;
             }
-            System.out.println(queue[rear]);
+            System.out.println();
         }
     }
 }
