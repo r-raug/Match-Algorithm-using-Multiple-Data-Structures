@@ -28,23 +28,38 @@ public class QueuePriority<T extends Comparable<T>> extends Queue<T>{
     @Override
     public void enqueue(T item) {
 
+//        if (isFull()) {
+//            resize();
+//        }
+//
+//        if (isEmpty() || comparator.compare(item, queue[front]) < 0) {
+//            front = (front - 1 + queue.length) % queue.length;
+//            queue[front] = item;
+//        } else {
+//            int pos = rear;
+//            while (pos != front && comparator.compare(item, queue[(pos - 1 + queue.length) % queue.length]) < 0) {
+//                queue[pos] = queue[(pos - 1 + queue.length) % queue.length];
+//                pos = (pos - 1 + queue.length) % queue.length;
+//            }
+//            queue[pos] = item;
+//        }
+//        rear = (rear + 1) % queue.length;
+//        size++;
         if (isFull()) {
             resize();
         }
-
-        if (isEmpty() || comparator.compare(item, queue[front]) < 0) {
-            front = (front - 1 + queue.length) % queue.length;
-            queue[front] = item;
+        if (isEmpty()) {
+            super.enqueue(item);
         } else {
             int pos = rear;
-            while (pos != front && comparator.compare(item, queue[(pos - 1 + queue.length) % queue.length]) < 0) {
-                queue[pos] = queue[(pos - 1 + queue.length) % queue.length];
-                pos = (pos - 1 + queue.length) % queue.length;
+            while (pos >= front && item.compareTo(queue[pos]) > 0) {
+                queue[(pos + 1) % queue.length] = queue[pos];
+                pos--;
             }
-            queue[pos] = item;
+            queue[(pos + 1) % queue.length] = item;
+            rear = (rear + 1) % queue.length;
+            size++;
         }
-        rear = (rear + 1) % queue.length;
-        size++;
     }
 
 
