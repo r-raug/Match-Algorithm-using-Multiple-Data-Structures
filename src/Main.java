@@ -38,49 +38,38 @@ public class Main {
         Comparator<Professors> seniorityComparator = Comparator.comparing(Professors::getSeniority);
 
         profProcessingQueue = new QueuePriority<>(seniorityComparator);
-
+        System.out.println(listOfProfs1.size());
 
         // When you receive the first element, use their id to look up their profId_select.txt file. 
         for (int i = 0; i < listOfProfs1.size(); i++) {
             profProcessingQueue.enqueue(listOfProfs1.get(i));
         }
 
-        System.out.println("XXXXXX");
-
+       
         profProcessingQueue.displayQueue();
-        System.out.println("XXXXXX");
+        
+        
         // Build the file path by using string concatenation.
-        int maxIterations = listOfProfs1.size(); // Define um limite máximo para evitar loops infinitos
-        while (!profProcessingQueue.isEmpty() && maxIterations > 0) {
+
+
+        while (!profProcessingQueue.isEmpty()) {
+            
             Professors currentProfessor = (Professors) profProcessingQueue.dequeue();
+            
             if (currentProfessor != null) {
-                String professorId = Integer.toString(currentProfessor.getId());
-                ReadProfessorSelection(professorId,computerScienceDepartment);
+                ReadProfessorSelection(currentProfessor, computerScienceDepartment);
             }
-            maxIterations--; // Reduz o número máximo de iterações em cada loop
+            
         }
         //
 
-        System.out.println("XXXXXX");
             // Aqui você processa as informações do professor, como ler o arquivo de seleção dele e verificar os requisitos.
             // Certifique-se de implementar a lógica necessária dentro da função ReadProfessorSelection.
         }
 
-//        for (int i = 0; i < profProcessingQueue.getSize(); i++){
-//
-//            Professors firstProfessor = (Professors) profProcessingQueue.dequeue();
-//            String professorId =  Integer.toString(firstProfessor.getId());
-//            ReadProfessorSelection(i);
-//            // Aqui a iteração passa por todos os professores, na ordem, e faz as atribuições nas listas ArrayList<Courses> listOfAffectedCourses de cada professor.
-//            // chama uma nova função que recebe o professor, lê o id e abre o arquivo dele.
-//            // Dentro da leitura, faz a verificação dos requisitos.
-//        }
-        // Open the file and read the first line: max requested hours. Subsequent line(s) contain(s) the selection.
-
-       
 
 
-
+// All the functions.
 
       
     public static void readProfs(){
@@ -129,6 +118,7 @@ public class Main {
 
                 String line = scanner.nextLine();
 
+
                 String id;                 // The course ID
                 String title;           // The course title
                 String discipline;      // The course discipline
@@ -146,6 +136,7 @@ public class Main {
                 numberOfHours = Short.parseShort(fields[3].trim());
                 prerequisite = fields[4].trim();
                 numOfGroups = Short.parseShort(fields[5].trim());
+
                 Courses newCourse = new Courses(id, title, discipline, numberOfHours, numOfGroups);
                 department.setCourseMap(newCourse);
             }
@@ -157,147 +148,62 @@ public class Main {
 
     }
 
-    public static void ReadProfessorSelection(String professorId, Departments department){
-//        try {
-//            File selectionFile = new File("src/Files/" + professorId + "_selection.txt");
-//            Scanner scanner = new Scanner(selectionFile);
-//            String line = scanner.nextLine();
-//            int maxHour = Integer.parseInt(line);
-//            while (scanner.hasNextLine()) {
-//
-//                // create an array of strings.
-//                String[] fields = line.split(":");
-//
-//
-//                Courses newCourse = new Courses(id, title, discipline, numberOfHours, numOfGroups);
-//                department.setCourseMap(newCourse);
-//            }
-//
-//            scanner.close();
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Professor file not found: " + e.getMessage());
-//        }
-        try {
-            File selectionFile = new File("src/Files/" + professorId + "_selection.txt");
-            Scanner scanner = new Scanner(selectionFile);
+    public static void ReadProfessorSelection(Professors professor, Departments department){
+        if(department == null){
+            System.out.println("Department doesn''t exist: ");
+            return;
+        }
+        try {  
+            System.out.println("=====1======");
+            File selectionFile = new File("src/Files/" + professor.getId() + "_selection.txt"); 
+            System.out.println("src/Files/" + professor.getId() + "_selection.txt");
+            Scanner scanner = new Scanner(selectionFile);                                    // open the selection file.
             int maxHour = Integer.parseInt(scanner.nextLine());
-            while (scanner.hasNextLine()) {
+            int count = 0;
+
+            while (scanner.hasNextLine()) {                // line by line, until the last one or hour reached.
+                System.out.println("=====2======");
                 String line = scanner.nextLine();
-                String[] fields = line.split(":");
+
+                String[] fields = line.split(",");
                 String courseId = fields[0].trim();
-                // Verifique se o departamento não é nulo e se contém o mapa de cursos antes de processá-lo
-                if (department != null && department.getCourseMap() != null && department.getCourseMap().containsKey(courseId)) {
-                    // Extrair os dados do curso do arquivo
-                    String courseTitle = fields[1].trim();
-                    String courseDiscipline = fields[2].trim();
-                    short numberOfHours = Short.parseShort(fields[3].trim());
-                    short numOfGroups = Short.parseShort(fields[4].trim());
-                    Courses newCourse = new Courses(courseId, courseTitle, courseDiscipline, numberOfHours, numOfGroups);
-                    department.setCourseMap(newCourse);
+                int TotalModules = Integer.parseInt(fields[1].trim());
+
+                //   if department has any course in it,    if the course in asked is in the department
+                if (department.getCourseMap() != null && department.getCourseMap().containsKey(courseId) && maxHour > 0) {
+                    System.out.println("=====3======");
+                    
+                    int hourPerWeek = department.getCourseMap().get(courseId).getNumberOfHours()/15; // hours per week.
+                    while (TotalModules != 0){           // The 
+                        if (hourPerWeek < maxHour) {
+                            maxHour -= hourPerWeek;
+    
+                            Courses course = department.getCourseMap().get(courseId);
+                            if (course != null){
+                                professor.appendListOfAffectedCourses(course);
+                                System.out.println("=====5======");
+                            }
+                        }
+                        TotalModules --;
+                    }
+                    
                 }
+                
+                List<Professors> testing = department.getListOfProfs();
+                System.out.println(testing.get(count).getLastName());
+                System.out.println(testing.get(count).toString());
+                count ++;
             }
             scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("Selection file not found: " + e.getMessage());
         }
+
+        
+
     }
 
 
-    
+ 
 
-    /* 
-    public static <T> void readFile(String pathFile, String type, List<T> ListOfSomething){
-
-        try {
-            File professorFile = new File(pathFile);
-            Scanner scanner = new Scanner(professorFile);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                
-                if (type.equals("professors")){
-                    Professors professor = addProfessors(line);
-                    ListOfSomething.add(professor);    //  Resolver a questão do tipo, enviando apenas a lista como argumento.
-                }
-                if (type.equals("course")){
-                    Courses course = addCourse(line);
-                    ListOfSomething.add((Course));
-
-                }
-            }
-
-
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Professor file not found: " + e.getMessage());
-        }
-    }    
-   */
-
-   /* 
-    public static Professors addProfessors(String line){
-        // read the line and create an professor instance
-
-        // initialize all the variables necessary to create a new instance of professor
-        int id;              
-        String lastName;
-        String firstName;
-        float seniority;    
-        String hiringDate;
-        Set<String> setOfDisciplines = new HashSet<>();
-        
-        // create an array of strings.
-        String[] fields = line.split(":");
-
-        // Put each part of the string in the correct variable.
-        id = Integer.parseInt(fields[0]);
-        String[] name = fields[1].split(" ");
-        lastName = name[0];
-        firstName = name[1];
-        seniority = Float.parseFloat(fields[2]);
-        hiringDate = fields[3];
-        String[] disciplines = fields[4].split(",");
-            for (String discipline : disciplines) {
-                setOfDisciplines.add(discipline);
-            }
-        Professors newProfessor = new Professors(id, lastName, firstName, seniority, hiringDate, setOfDisciplines);
-        return newProfessor;
-    }
-
-   */
-
-
-        
-        // read the line and create an course instance
-    
-/* 
-    public static Professors addCourse(){
-        // read the line and create an professor instance
-
-        // initialize all the variables necessary to create a new instance of professor
-
-        String id;                 // The course ID
-        String title;           // The course title
-        String discipline;      // The course discipline
-        short numberOfHours;    // The number of hours for the course
-        String prerequisite;                                                 /// implementar esse aqui.
-        short numOfGroups;
-        
-        // create an array of strings.
-        String[] fields = line.split(":");
-
-        // Put each part of the string in the correct variable.
-        id = (fields[0]);
-        String[] name = fields[1].split(" ");
-        lastName = name[0];
-        firstName = name[1];
-        seniority = Float.parseFloat(fields[2]);
-        hiringDate = fields[3];
-        String[] disciplines = fields[4].split(",");
-            for (String discipline : disciplines) {
-                setOfDisciplines.add(discipline);
-            }
-        Professors newProfessor = new Professors(id, lastName, firstName, seniority, hiringDate, setOfDisciplines);
-        return newProfessor;
-    }
-*/
 }
