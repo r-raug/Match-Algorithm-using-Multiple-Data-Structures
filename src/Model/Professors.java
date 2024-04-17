@@ -119,6 +119,10 @@ public class Professors implements Comparable<Professors> {
         return listOfAffectedCourses;
     }
 
+    public void setListOfAffectedCourses(ArrayList<Courses> listOfAffectedCourses) {
+        this.listOfAffectedCourses = listOfAffectedCourses;
+    }
+
     public void appendListOfAffectedCourses( Courses courseToAdd) {
         this.listOfAffectedCourses.add(courseToAdd);
     }
