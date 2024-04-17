@@ -75,21 +75,19 @@ public class Queue<T extends Comparable<T>>{
      */
     public T dequeue() {
         if (isEmpty()) {
-            System.out.println("Queue.Queue is empty.");
+            System.out.println("Queue is empty.");
             return null;
         } else {
+            size--;
             T item = queue[front];
             if (front == rear) {
                 front = -1;
                 rear = -1;
             } else {
-                front = (front + 1) % size;
+                front = (front + 1) % queue.length;
             }
-            size--;
             return item;
-
         }
-
     }
 
     /**

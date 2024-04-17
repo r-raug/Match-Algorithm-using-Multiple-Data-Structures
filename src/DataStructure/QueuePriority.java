@@ -32,12 +32,12 @@ public class QueuePriority<T extends Comparable<T>> extends Queue<T>{
             front = (front - 1 + queue.length) % queue.length;
             queue[front] = item;
         } else {
-            int insertIndex = rear;
-            while (insertIndex != front && comparator.compare(item, queue[(insertIndex - 1 + queue.length) % queue.length]) < 0) {
-                queue[insertIndex] = queue[(insertIndex - 1 + queue.length) % queue.length];
-                insertIndex = (insertIndex - 1 + queue.length) % queue.length;
+            int pos = rear;
+            while (pos != front && comparator.compare(item, queue[(pos - 1 + queue.length) % queue.length]) < 0) {
+                queue[pos] = queue[(pos - 1 + queue.length) % queue.length];
+                pos = (pos - 1 + queue.length) % queue.length;
             }
-            queue[insertIndex] = item;
+            queue[pos] = item;
             rear = (rear + 1) % queue.length;
         }
 
