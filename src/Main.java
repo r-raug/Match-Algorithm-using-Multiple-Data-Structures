@@ -45,9 +45,9 @@ public class Main {
             profProcessingQueue.enqueue(listOfProfs1.get(i));
         }
 
-       
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXx");
         profProcessingQueue.displayQueue();
-        
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXx");
         
         // Build the file path by using string concatenation.
 
@@ -165,9 +165,12 @@ public class Main {
                 System.out.println("=====2======");
                 String line = scanner.nextLine();
 
+                //System.out.println(line);
+
                 String[] fields = line.split(",");
                 String courseId = fields[0].trim();
                 int TotalModules = Integer.parseInt(fields[1].trim());
+
 
                 //   if department has any course in it,    if the course in asked is in the department
                 if (department.getCourseMap() != null && department.getCourseMap().containsKey(courseId) && maxHour > 0) {

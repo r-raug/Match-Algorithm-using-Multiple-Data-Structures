@@ -16,6 +16,7 @@ public class Professors implements Comparable<Professors> {
     private String hiringDate;  // dd-mm-yyyy date format
     private Set<String> setOfDisciplines;
     private ArrayList<Courses> listOfAffectedCourses;
+    private int weeklyHours;
 
 
 
@@ -36,7 +37,7 @@ public class Professors implements Comparable<Professors> {
         this.seniority = seniority;
         this.hiringDate = hiringDate;
         this.setOfDisciplines = setOfDisciplines;
-        this.listOfAffectedCourses = null;
+        this.listOfAffectedCourses = new ArrayList<>();
     }
 
     /**
@@ -59,10 +60,18 @@ public class Professors implements Comparable<Professors> {
         return id;
     }
 
+
     public void setId(int id) {
         this.id = id;
     }
 
+//    public int getWeeklyHours() {
+//        return weeklyHours;
+//    }
+
+    public void setWeeklyHours(int weeklyHours) {
+        this.weeklyHours = weeklyHours;
+    }
     // String lastName;
 
     public String getLastName() {
@@ -169,6 +178,16 @@ public class Professors implements Comparable<Professors> {
         return sb.toString();
     }
     
+
+    public float getWeeklyHours() {
+        float totalHours = 0;
+        if (listOfAffectedCourses != null) {
+            for (Courses course : listOfAffectedCourses) {
+                totalHours += course.getNumberOfHours();
+            }
+        }
+        return totalHours;
+    }
 
 }
 
