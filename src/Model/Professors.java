@@ -177,6 +177,7 @@ public class Professors implements Comparable<Professors> {
             }
         }
         sb.append("\n");
+        sb.append("Total Weekly Hours: ").append(getWeeklyHours()).append("\n");
         return sb.toString();
     }
     

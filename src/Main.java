@@ -23,11 +23,11 @@ public class Main {
         // A.a
         listOfProfs1 = new ArrayList(); 
         readProfs();
-        System.out.println(listOfProfs1.toString());
+        //System.out.println(listOfProfs1.toString());
 
         // A.b
         Departments computerScienceDepartment = new Departments(listOfProfs1);
-        System.out.println(computerScienceDepartment.getListOfProfs());
+        //System.out.println(computerScienceDepartment.getListOfProfs());
 
         // A.c
         ReadCourse(computerScienceDepartment);
@@ -38,16 +38,16 @@ public class Main {
         Comparator<Professors> seniorityComparator = Comparator.comparing(Professors::getSeniority);
 
         profProcessingQueue = new QueuePriority<>(seniorityComparator);
-        System.out.println(listOfProfs1.size());
+        //System.out.println(listOfProfs1.size());
 
         // When you receive the first element, use their id to look up their profId_select.txt file. 
         for (int i = 0; i < listOfProfs1.size(); i++) {
             profProcessingQueue.enqueue(listOfProfs1.get(i));
         }
 
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXx");
-        profProcessingQueue.displayQueue();
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXx");
+        //System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXx");
+        //profProcessingQueue.displayQueue();
+        //System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXx");
         
         // Build the file path by using string concatenation.
 
@@ -62,14 +62,26 @@ public class Main {
             
         }
         //
+        showProfessorsWithCourses(listOfProfs1);
 
-            // Aqui você processa as informações do professor, como ler o arquivo de seleção dele e verificar os requisitos.
-            // Certifique-se de implementar a lógica necessária dentro da função ReadProfessorSelection.
         }
 
 
 
 // All the functions.
+public static void showProfessorsWithCourses(List<Professors> professors) {
+    for (Professors professor : professors) {
+        System.out.println("Professor ID: " + professor.getId());
+        System.out.println("Last Name: " + professor.getLastName());
+        System.out.println("First Name: " + professor.getFirstName());
+        System.out.println("Courses Assigned:");
+        for (Courses course : professor.getListOfAffectedCourses()) {
+            System.out.println("- " + course.getTitle() + " (" + course.getId() + ")");
+        }
+        System.out.println("Total Hours weekly: " + professor.getWeeklyHours()/15);
+        System.out.println();
+    }
+}
 
       
     public static void readProfs(){
@@ -148,66 +160,47 @@ public class Main {
 
     }
 
-    public static void ReadProfessorSelection(Professors professor, Departments department){
-        if(department == null){
-            System.out.println("Department doesn''t exist: ");
+    public static void ReadProfessorSelection(Professors professor, Departments department) {
+        if (department == null) {
+            System.out.println("Department doesn't exist: ");
             return;
         }
-        try {  
-            System.out.println("=====1======");
-            File selectionFile = new File("src/Files/" + professor.getId() + "_selection.txt"); 
-            System.out.println("src/Files/" + professor.getId() + "_selection.txt");
-            Scanner scanner = new Scanner(selectionFile);                                    // open the selection file.
+        try {
+            File selectionFile = new File("src/Files/" + professor.getId() + "_selection.txt");
+            //System.out.println("src/Files/" + professor.getId() + "_selection.txt");
+            Scanner scanner = new Scanner(selectionFile); // open the selection file.
             int maxHour = Integer.parseInt(scanner.nextLine());
             int count = 0;
 
-            while (scanner.hasNextLine()) {                // line by line, until the last one or hour reached.
-                System.out.println("=====2======");
+            while (scanner.hasNextLine() && maxHour > 0) {
+                //System.out.println("=====2======");
                 String line = scanner.nextLine();
-
-                //System.out.println(line);
-
                 String[] fields = line.split(",");
                 String courseId = fields[0].trim();
-                int TotalModules = Integer.parseInt(fields[1].trim());
-                System.out.println("Total modules: " + TotalModules );
+                int totalModules = Integer.parseInt(fields[1].trim());
+                //System.out.println("Total modules: " + totalModules);
 
-
-                //   if department has any course in it,    if the course in asked is in the department
-                if (department.getCourseMap() != null && department.getCourseMap().containsKey(courseId) && maxHour > 0) {
-                    System.out.println("=====3======");
-                    
-                    int hourPerWeek = department.getCourseMap().get(courseId).getNumberOfHours()/15; // hours per week.
-                    while (TotalModules != 0){           // The 
-                        if (hourPerWeek < maxHour) {
-                            maxHour -= hourPerWeek;
-    
-                            Courses course = department.getCourseMap().get(courseId);
-                            if (course != null){
-                                professor.appendListOfAffectedCourses(course);
-                                System.out.println("=====5======");
-                            }
+                if (department.getCourseMap() != null && department.getCourseMap().containsKey(courseId)) {
+                    int courseHours = department.getCourseMap().get(courseId).getNumberOfHours();
+                    int modulesToAssign = Math.min(totalModules, maxHour / (courseHours / 15));
+                    for (int i = 0; i < modulesToAssign; i++) {
+                        maxHour -= courseHours / 15;
+                        Courses course = department.getCourseMap().get(courseId);
+                        if (course != null) {
+                            professor.appendListOfAffectedCourses(course);
+                            //System.out.println("Course " + course.getId() + " assigned to Professor " + professor.getId());
                         }
-                        TotalModules --;
                     }
-                    
+                } else {
+                    System.out.println("Course " + courseId + " not found in department's course map.");
                 }
-                
-                List<Professors> testing = department.getListOfProfs();
-                System.out.println(testing.get(count).getLastName());
-                System.out.println(testing.get(count).toString());
-                count ++;
+                count++;
             }
             scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("Selection file not found: " + e.getMessage());
         }
-
-        
-
     }
-
-
  
 
 }
