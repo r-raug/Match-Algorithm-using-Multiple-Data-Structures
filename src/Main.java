@@ -168,6 +168,7 @@ public class Main {
                 String[] fields = line.split(",");
                 String courseId = fields[0].trim();
                 int TotalModules = Integer.parseInt(fields[1].trim());
+                System.out.println("Total modules: " + TotalModules );
 
                 //   if department has any course in it,    if the course in asked is in the department
                 if (department.getCourseMap() != null && department.getCourseMap().containsKey(courseId) && maxHour > 0) {
