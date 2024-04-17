@@ -38,6 +38,7 @@ public class Professors implements Comparable<Professors> {
         this.hiringDate = hiringDate;
         this.setOfDisciplines = setOfDisciplines;
         this.listOfAffectedCourses = new ArrayList<>();
+        this.weeklyHours = 0;
     }
 
     /**
@@ -52,6 +53,7 @@ public class Professors implements Comparable<Professors> {
         this.seniority = professorToCopy.seniority;
         this.hiringDate = professorToCopy.hiringDate;
         this.setOfDisciplines = professorToCopy.setOfDisciplines;
+        this.weeklyHours = professorToCopy.weeklyHours;
     }
 
     //  int id
@@ -188,6 +190,8 @@ public class Professors implements Comparable<Professors> {
         }
         return totalHours;
     }
+
+    
 
 }
 
