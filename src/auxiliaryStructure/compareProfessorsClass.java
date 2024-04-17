@@ -36,9 +36,9 @@ public class compareProfessorsClass implements Comparator<Professors> {
         float seniorityB = b.getSeniority();
 
         if (seniorityA > seniorityB) {
-            return -1; // A tem maior seniority, então vem antes de B na fila
+            return 1; // A tem maior seniority, então vem antes de B na fila
         } else if (seniorityA < seniorityB) {
-            return 1; // B tem maior seniority, então vem antes de A na fila
+            return -1; // B tem maior seniority, então vem antes de A na fila
         } else {
             return 0; // A e B têm o mesmo seniority, a ordem não importa
         }

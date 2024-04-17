@@ -20,23 +20,19 @@ public class Queue<T extends Comparable<T>>{
     public Queue() {
         front = 0;
         rear = -1;
-        size = 0;
+        this.size = 0;
         queue = (T[]) new Comparable[20];
     }
 
     /**
      * Constructs a queue initialized with the elements of the given list.
-     * @param list the list of elements to initialize the queue with
+     * @param int newsize to initialize the queue with
      */
-    public Queue(List<T> list) {
-        size = list.size();
+    public Queue(int newsize) {
+        size = 0;
         front = 0;
-        rear = size - 1;
-        queue = (T[]) new Comparable[size * 2];
-        int i = 0;
-        for (T item : list) {
-            this.queue[i++] = item;
-        }
+        rear = - 1;
+        queue = (T[]) new Comparable[newsize * 2];
     }
 
     /**
@@ -78,7 +74,6 @@ public class Queue<T extends Comparable<T>>{
             System.out.println("Queue is empty.");
             return null;
         } else {
-            size--;
             T item = queue[front];
             if (front == rear) {
                 front = -1;
@@ -86,6 +81,7 @@ public class Queue<T extends Comparable<T>>{
             } else {
                 front = (front + 1) % queue.length;
             }
+            size --;
             return item;
         }
     }
@@ -123,13 +119,12 @@ public class Queue<T extends Comparable<T>>{
         if (isEmpty()) {
             System.out.println("Queue is empty.");
         } else {
+            int count = 0;
             int i = front;
-            while (true) {
+            while (count < size) {
                 System.out.print(queue[i] + " ");
-                if (i == rear) {
-                    break; // Sai do loop quando i alcança rear
-                }
                 i = (i + 1) % queue.length;
+                count++;
             }
             System.out.println();
         }

@@ -12,6 +12,11 @@ public class Departments {
     private List<Professors> listOfProfs;
     private Map<String, Courses> courseMap;
 
+    /**
+     * Constructs a new Departments object with the specified list of professors.
+     *
+     * @param listOfProfs The list of professors in the department.
+     */
     public Departments(List<Professors> listOfProfs) {
         this.listOfProfs = listOfProfs;
         this.courseMap = new HashMap<>();
@@ -32,12 +37,5 @@ public class Departments {
     public void setListOfProfs(List<Professors> listOfProfs) {
         this.listOfProfs = listOfProfs;
     }
-
-
-
-    
-
-   
-
 
 }

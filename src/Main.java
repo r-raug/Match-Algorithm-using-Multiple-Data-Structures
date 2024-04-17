@@ -23,9 +23,11 @@ public class Main {
         // A.a
         listOfProfs1 = new ArrayList(); 
         readProfs();
+        System.out.println(listOfProfs1.toString());
 
         // A.b
         Departments computerScienceDepartment = new Departments(listOfProfs1);
+        System.out.println(computerScienceDepartment.getListOfProfs());
 
         // A.c
         ReadCourse(computerScienceDepartment);
@@ -37,21 +39,29 @@ public class Main {
 
         profProcessingQueue = new QueuePriority<>(seniorityComparator);
 
+
         // When you receive the first element, use their id to look up their profId_select.txt file. 
         for (int i = 0; i < listOfProfs1.size(); i++) {
             profProcessingQueue.enqueue(listOfProfs1.get(i));
         }
+
+        System.out.println("XXXXXX");
+
+        profProcessingQueue.displayQueue();
+        System.out.println("XXXXXX");
         // Build the file path by using string concatenation.
         int maxIterations = listOfProfs1.size(); // Define um limite máximo para evitar loops infinitos
         while (!profProcessingQueue.isEmpty() && maxIterations > 0) {
             Professors currentProfessor = (Professors) profProcessingQueue.dequeue();
             if (currentProfessor != null) {
                 String professorId = Integer.toString(currentProfessor.getId());
-                ReadProfessorSelection(professorId);
+                ReadProfessorSelection(professorId,computerScienceDepartment);
             }
             maxIterations--; // Reduz o número máximo de iterações em cada loop
         }
+        //
 
+        System.out.println("XXXXXX");
             // Aqui você processa as informações do professor, como ler o arquivo de seleção dele e verificar os requisitos.
             // Certifique-se de implementar a lógica necessária dentro da função ReadProfessorSelection.
         }
@@ -147,7 +157,7 @@ public class Main {
 
     }
 
-    public static void ReadProfessorSelection(String professorId){
+    public static void ReadProfessorSelection(String professorId, Departments department){
 //        try {
 //            File selectionFile = new File("src/Files/" + professorId + "_selection.txt");
 //            Scanner scanner = new Scanner(selectionFile);
@@ -167,35 +177,31 @@ public class Main {
 //        } catch (FileNotFoundException e) {
 //            System.out.println("Professor file not found: " + e.getMessage());
 //        }
-        Departments department = null;
         try {
             File selectionFile = new File("src/Files/" + professorId + "_selection.txt");
             Scanner scanner = new Scanner(selectionFile);
-            int maxHour = Integer.parseInt(scanner.nextLine()); // Lendo a linha com o número máximo de horas
-
-            // Supondo que você tenha uma instância do departamento disponível aqui
-            department = new Departments(listOfProfs1);
-
+            int maxHour = Integer.parseInt(scanner.nextLine());
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] fields = line.split(":");
-                // Extrair os dados do curso do arquivo
                 String courseId = fields[0].trim();
-                String courseTitle = fields[1].trim();
-                String courseDiscipline = fields[2].trim();
-                short numberOfHours = Short.parseShort(fields[3].trim());
-                short numOfGroups = Short.parseShort(fields[4].trim());
-                // Criar uma instância de Courses
-                Courses newCourse = new Courses(courseId, courseTitle, courseDiscipline, numberOfHours, numOfGroups);
-                // Adicionar o curso ao mapa do departamento
-                department.setCourseMap(newCourse);
+                // Verifique se o departamento não é nulo e se contém o mapa de cursos antes de processá-lo
+                if (department != null && department.getCourseMap() != null && department.getCourseMap().containsKey(courseId)) {
+                    // Extrair os dados do curso do arquivo
+                    String courseTitle = fields[1].trim();
+                    String courseDiscipline = fields[2].trim();
+                    short numberOfHours = Short.parseShort(fields[3].trim());
+                    short numOfGroups = Short.parseShort(fields[4].trim());
+                    Courses newCourse = new Courses(courseId, courseTitle, courseDiscipline, numberOfHours, numOfGroups);
+                    department.setCourseMap(newCourse);
+                }
             }
-
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Professor file not found: " + e.getMessage());
+            System.out.println("Selection file not found: " + e.getMessage());
         }
     }
+
 
     
 

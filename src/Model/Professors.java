@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import auxiliaryStructure.compareProfessorsClass;
 
+
 public class Professors implements Comparable<Professors> {
 
     private int id;              // 4 digits
@@ -122,7 +123,12 @@ public class Professors implements Comparable<Professors> {
         this.listOfAffectedCourses = listOfAffectedCourses;
     }
 
-   
+    /**
+     * Compares this professor with another professor based on their seniority.
+     *
+     * @param other The other professor to compare.
+     * @return A negative integer, zero, or a positive integer as this professor is less than, equal to, or greater than the other professor.
+     */
     public int compareTo (Professors other) {
         
         compareProfessorsClass compare = new compareProfessorsClass ();
@@ -130,9 +136,13 @@ public class Professors implements Comparable<Professors> {
         return compare.compareProfessors(this, other);
     }
 
-    
 
-    
+
+    /**
+     * Returns a string representation of the professor.
+     *
+     * @return A string representation of the professor.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
