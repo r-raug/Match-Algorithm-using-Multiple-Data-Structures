@@ -36,7 +36,7 @@ public class Professors implements Comparable<Professors> {
         this.seniority = seniority;
         this.hiringDate = hiringDate;
         this.setOfDisciplines = setOfDisciplines;
-        this.listOfAffectedCourses = new ArrayList<Courses>(null);
+        this.listOfAffectedCourses = null;
     }
 
     /**
@@ -159,10 +159,16 @@ public class Professors implements Comparable<Professors> {
         sb.append("Seniority: ").append(seniority).append("\n");
         sb.append("Hiring Date: ").append(hiringDate).append("\n");
         sb.append("Set of Disciplines: ").append(setOfDisciplines).append("\n");
-        sb.append("List of Affected Courses: ").append(listOfAffectedCourses).append("\n");
+        sb.append("List of Affected Courses: ");
+        if (listOfAffectedCourses != null) {
+            for (Courses course : listOfAffectedCourses) {
+                sb.append(course.getId()).append(", ");
+            }
+        }
         sb.append("\n");
         return sb.toString();
     }
+    
 
 }
 
