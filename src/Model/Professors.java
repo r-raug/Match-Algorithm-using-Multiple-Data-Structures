@@ -186,7 +186,7 @@ public class Professors implements Comparable<Professors> {
         float totalHours = 0;
         if (listOfAffectedCourses != null) {
             for (Courses course : listOfAffectedCourses) {
-                totalHours += course.getNumberOfHours();
+                totalHours += course.getNumberOfHours()/15;
             }
         }
         return totalHours;

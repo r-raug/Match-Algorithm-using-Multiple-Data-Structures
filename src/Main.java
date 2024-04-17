@@ -64,6 +64,7 @@ public class Main {
         //
         showProfessorsWithCourses(listOfProfs1);
 
+
         }
 
 
@@ -71,15 +72,7 @@ public class Main {
 // All the functions.
 public static void showProfessorsWithCourses(List<Professors> professors) {
     for (Professors professor : professors) {
-        System.out.println("Professor ID: " + professor.getId());
-        System.out.println("Last Name: " + professor.getLastName());
-        System.out.println("First Name: " + professor.getFirstName());
-        System.out.println("Courses Assigned:");
-        for (Courses course : professor.getListOfAffectedCourses()) {
-            System.out.println("- " + course.getTitle() + " (" + course.getId() + ")");
-        }
-        System.out.println("Total Hours weekly: " + professor.getWeeklyHours()/15);
-        System.out.println();
+        System.out.println(professor.toString());
     }
 }
 
