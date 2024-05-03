@@ -1,10 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Set;
-import auxiliaryStructure.compareProfessorsClass;
 
 
 public class Professors implements Comparable<Professors> {
@@ -114,14 +111,14 @@ public class Professors implements Comparable<Professors> {
         this.hiringDate = hireDate;
     }
 
-    // Set<String> setOfDiciplines;
+    // Set<String> setOfDisciplines;
 
     public Set<String> getSetOfDisciplines() {
         return setOfDisciplines;
     }
 
-    public void setSetOfDisciplines(Set<String> setOfDiciplines) {
-        this.setOfDisciplines = setOfDiciplines;
+    public void setSetOfDisciplines(Set<String> setOfDisciplines) {
+        this.setOfDisciplines = setOfDisciplines;
     }
 
     // List<Courses>

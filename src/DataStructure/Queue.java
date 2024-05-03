@@ -1,8 +1,5 @@
 package DataStructure;
-import auxiliaryStructure.compareProfessorsClass;
-
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Represents a generic queue implemented using an array.
@@ -26,13 +23,13 @@ public class Queue<T extends Comparable<T>>{
 
     /**
      * Constructs a queue initialized with the elements of the given list.
-     * @param int newsize to initialize the queue with
+     * @param int newSize to initialize the queue with
      */
-    public Queue(int newsize) {
+    public Queue(int newSize) {
         size = 0;
         front = 0;
         rear = - 1;
-        queue = (T[]) new Comparable[newsize * 2];
+        queue = (T[]) new Comparable[newSize * 2];
     }
 
     /**
@@ -103,11 +100,9 @@ public class Queue<T extends Comparable<T>>{
      */
     public void resize() {
         int temp = size * 2;
-        int j=front;
         T[] tempQueue = Arrays.copyOf(queue, temp);
         for (int i = 0; i < size; i++) {
             tempQueue[i] = queue[(front + i) % queue.length];
-            //tempQueue[i] = queue[(j++) % queue.length];
         }
         queue = tempQueue;
         front = 0;

@@ -12,51 +12,37 @@ public class compareProfessorsClass implements Comparator<Professors> {
 
     public int compare(Professors a, Professors b) {
         if (a == null && b == null) {
-            return 0; // Se ambos forem nulos, eles são iguais
+            return 0;
         } else if (a == null) {
-            return 1; // Se apenas "a" for nulo, "b" tem maior prioridade
+            return 1;
         } else if (b == null) {
-            return -1; // Se apenas "b" for nulo, "a" tem maior prioridade
+            return -1;
         }
 
-        // Se nenhum dos professores for nulo, continue com a comparação normal
+       
         if (a.getSeniority() > b.getSeniority()) {
-            return -1; // "a" tem maior prioridade que "b"
+            return -1; 
         } else if (a.getSeniority() < b.getSeniority()) {
-            return 1; // "b" tem maior prioridade que "a"
+            return 1; 
         } else {
-            return 0; // Ambos têm a mesma prioridade
+            return 0; 
         }
     }
 
     public short compareProfessors (Professors a, Professors b) {
         // first compare the seniority.
-        // Comparar os professores com base no seniority
         float seniorityA = a.getSeniority();
         float seniorityB = b.getSeniority();
 
         if (seniorityA > seniorityB) {
-            return 1; // A tem maior seniority, então vem antes de B na fila
+            return 1;
         } else if (seniorityA < seniorityB) {
-            return -1; // B tem maior seniority, então vem antes de A na fila
+            return -1; 
         } else {
-            return 0; // A e B têm o mesmo seniority, a ordem não importa
+            return 0; 
         }
 
-//        // if the seniority is the same, compare the hire date.
-//        short hireDateCompare = isOlder( a.getHiringDateString(), b.getHiringDateString() );
-//        if ( hireDateCompare != 0)  {
-//            return -1;
-//        }
-//
-//        // if the hire date is the same, compare the ID number
-//        if( a.getId() > b.getId() ){
-//            return 1;
-//        }
-//
-//        return -1;
-//
-//
+
     }
        
     private short compareSeniority (float seniorityA, float seniorityB) {

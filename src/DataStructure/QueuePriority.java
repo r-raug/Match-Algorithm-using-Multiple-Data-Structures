@@ -118,8 +118,8 @@ public class QueuePriority<T extends Comparable<T>> extends Queue<T>{
             return -1;
         }
         int i = 0;
-        compareProfessorsClass comparator = new compareProfessorsClass(); // Instanciando a classe de comparação
-        while (i < size && comparator.compareProfessors((Professors) queue[i], (Professors) item) < 0) { // Comparando usando a classe de comparação
+        compareProfessorsClass comparator = new compareProfessorsClass(); 
+        while (i < size && comparator.compareProfessors((Professors) queue[i], (Professors) item) < 0) { 
             i = (i + 1) % queue.length;
         }
         return i;

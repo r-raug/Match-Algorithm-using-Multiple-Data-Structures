@@ -1,11 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-//import java.util.Arrays;
-
-import DataStructure.Queue;
-import DataStructure.QueueNode;
-import DataStructure.QueueNodeGeneric;
 import DataStructure.QueuePriority;
 import Model.Courses;
 import Model.Departments;

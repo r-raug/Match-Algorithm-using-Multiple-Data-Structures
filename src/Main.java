@@ -1,10 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-
-import DataStructure.Queue;
-import DataStructure.QueueNode;
-import DataStructure.QueueNodeGeneric;
 import DataStructure.QueuePriority;
 import Model.Courses;
 import Model.Departments;
@@ -19,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
 
         // A.a
-        listOfProfs1 = new ArrayList<>(); // Adicionado os símbolos <>
+        listOfProfs1 = new ArrayList<>();
 
         readProfs();
         System.out.println(listOfProfs1.toString());
@@ -112,7 +108,7 @@ public class Main {
                 String title; // The course title
                 String discipline; // The course discipline
                 short numberOfHours; // The number of hours for the course
-                String prerequisite; // implementar esse aqui.
+                String prerequisite; // To implement.
                 short numOfGroups;
 
                 // create an array of strings.
@@ -144,7 +140,6 @@ public class Main {
             File selectionFile = new File("src/Files/" + professor.getId() + "_selection.txt");
             Scanner scanner = new Scanner(selectionFile); // open the selection file.
             int maxHour = Integer.parseInt(scanner.nextLine());
-            int count = 0;
 
             while (scanner.hasNextLine() && maxHour > 0) {
                 String line = scanner.nextLine();
@@ -166,7 +161,6 @@ public class Main {
                 } else {
                     System.out.println("Course " + courseId + " not found in department's course map.");
                 }
-                count++;
             }
             scanner.close();
         } catch (FileNotFoundException e) {
