@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-//import java.util.Arrays;
 
 import DataStructure.Queue;
 import DataStructure.QueueNode;
@@ -13,7 +12,6 @@ import Model.Professors;
 
 public class Main {
 
-
     public static List<Professors> listOfProfs1;
     public static HashMap<String, Courses> courseMap1;
     public static QueuePriority profProcessingQueue;
@@ -21,76 +19,64 @@ public class Main {
     public static void main(String[] args) {
 
         // A.a
-        listOfProfs1 = new ArrayList(); 
+        listOfProfs1 = new ArrayList<>(); // Adicionado os símbolos <>
+
         readProfs();
-        //System.out.println(listOfProfs1.toString());
+        System.out.println(listOfProfs1.toString());
 
         // A.b
         Departments computerScienceDepartment = new Departments(listOfProfs1);
-        //System.out.println(computerScienceDepartment.getListOfProfs());
 
         // A.c
         ReadCourse(computerScienceDepartment);
 
         // B.a
-        
-        // Start by examining the profProcessingQueue. 
+        // Start by examining the profProcessingQueue.
         Comparator<Professors> seniorityComparator = Comparator.comparing(Professors::getSeniority);
 
         profProcessingQueue = new QueuePriority<>(seniorityComparator);
-        //System.out.println(listOfProfs1.size());
 
-        // When you receive the first element, use their id to look up their profId_select.txt file. 
+        // When you receive the first element, use their id to look up their profId_select.txt file.
         for (int i = 0; i < listOfProfs1.size(); i++) {
             profProcessingQueue.enqueue(listOfProfs1.get(i));
         }
 
-        //System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXx");
-        //profProcessingQueue.displayQueue();
-        //System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXx");
-        
+        profProcessingQueue.displayQueue();
+
         // Build the file path by using string concatenation.
-
-
         while (!profProcessingQueue.isEmpty()) {
-            
             Professors currentProfessor = (Professors) profProcessingQueue.dequeue();
-            
+
             if (currentProfessor != null) {
                 ReadProfessorSelection(currentProfessor, computerScienceDepartment);
             }
-            
         }
-        //
+
         showProfessorsWithCourses(listOfProfs1);
-
-
-        }
-
-
-
-// All the functions.
-public static void showProfessorsWithCourses(List<Professors> professors) {
-    for (Professors professor : professors) {
-        System.out.println(professor.toString());
     }
-}
 
-      
-    public static void readProfs(){
+    // All the functions.
+
+    public static void showProfessorsWithCourses(List<Professors> professors) {
+        for (Professors professor : professors) {
+            System.out.println(professor.toString());
+        }
+    }
+
+    public static void readProfs() {
         try {
             File professorFile = new File("src/Files/profs.txt");
             Scanner scanner = new Scanner(professorFile);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 // initialize all the variables necessary to create a new instance of professor
-                int id;              
+                int id;
                 String lastName;
                 String firstName;
-                float seniority;    
+                float seniority;
                 String hiringDate;
                 Set<String> setOfDisciplines = new HashSet<>();
-                
+
                 // create an array of strings.
                 String[] fields = line.split(":");
 
@@ -106,16 +92,15 @@ public static void showProfessorsWithCourses(List<Professors> professors) {
                     setOfDisciplines.add(discipline);
                 }
                 Professors newProfessor = new Professors(id, lastName, firstName, seniority, hiringDate, setOfDisciplines);
-                listOfProfs1.add(newProfessor);  // This line add the object type Professors to the list
+                listOfProfs1.add(newProfessor); // This line add the object type Professors to the list
             }
-        }   catch(Exception exception) {
+            scanner.close();
+        } catch (Exception exception) {
             System.out.println(exception);
         }
-           
     }
 
-
-    public static void ReadCourse(Departments department){
+    public static void ReadCourse(Departments department) {
         try {
             File courseFile = new File("src/Files/courses_f22.txt");
             Scanner scanner = new Scanner(courseFile);
@@ -123,12 +108,11 @@ public static void showProfessorsWithCourses(List<Professors> professors) {
 
                 String line = scanner.nextLine();
 
-
-                String id;                 // The course ID
-                String title;           // The course title
-                String discipline;      // The course discipline
-                short numberOfHours;    // The number of hours for the course
-                String prerequisite;                                                 /// implementar esse aqui.
+                String id; // The course ID
+                String title; // The course title
+                String discipline; // The course discipline
+                short numberOfHours; // The number of hours for the course
+                String prerequisite; // implementar esse aqui.
                 short numOfGroups;
 
                 // create an array of strings.
@@ -145,12 +129,10 @@ public static void showProfessorsWithCourses(List<Professors> professors) {
                 Courses newCourse = new Courses(id, title, discipline, numberOfHours, numOfGroups);
                 department.setCourseMap(newCourse);
             }
-
             scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("Professor file not found: " + e.getMessage());
         }
-
     }
 
     public static void ReadProfessorSelection(Professors professor, Departments department) {
@@ -160,18 +142,15 @@ public static void showProfessorsWithCourses(List<Professors> professors) {
         }
         try {
             File selectionFile = new File("src/Files/" + professor.getId() + "_selection.txt");
-            //System.out.println("src/Files/" + professor.getId() + "_selection.txt");
             Scanner scanner = new Scanner(selectionFile); // open the selection file.
             int maxHour = Integer.parseInt(scanner.nextLine());
             int count = 0;
 
             while (scanner.hasNextLine() && maxHour > 0) {
-                //System.out.println("=====2======");
                 String line = scanner.nextLine();
                 String[] fields = line.split(",");
                 String courseId = fields[0].trim();
                 int totalModules = Integer.parseInt(fields[1].trim());
-                //System.out.println("Total modules: " + totalModules);
 
                 if (department.getCourseMap() != null && department.getCourseMap().containsKey(courseId)) {
                     int courseHours = department.getCourseMap().get(courseId).getNumberOfHours();
@@ -194,6 +173,4 @@ public static void showProfessorsWithCourses(List<Professors> professors) {
             System.out.println("Selection file not found: " + e.getMessage());
         }
     }
- 
-
 }

@@ -44,18 +44,21 @@ public class QueueNodeGeneric <T>{
     /**
      * Removes the element at the front of the queue.
      */
-    public void dequeue(){
+    public NodeGeneric<T> dequeue(){
         if(isEmpty()){
             System.out.println("Nothing to delete...");
-            return;
+            return null;
         }
         if(size == 1){
+            NodeGeneric<T> result = head;
             head = tail = null;
             size --;
-            return;
+            return result;
         }
+        NodeGeneric<T> result = head;
         head = head.getNext();
         size --;
+        return result;
     }
 
     /**

@@ -140,19 +140,21 @@ public class Professors implements Comparable<Professors> {
         }
         this.listOfAffectedCourses.add(courseToAdd);
     }
-
+/* 
     /**
      * Compares this professor with another professor based on their seniority.
      *
      * @param other The other professor to compare.
      * @return A negative integer, zero, or a positive integer as this professor is less than, equal to, or greater than the other professor.
      */
-    public int compareTo (Professors other) {
+   /*  public int compareTo (Professors other) {
         
         compareProfessorsClass compare = new compareProfessorsClass ();
-
+        
         return compare.compareProfessors(this, other);
     }
+*/
+
 
 
 
@@ -181,6 +183,15 @@ public class Professors implements Comparable<Professors> {
         return sb.toString();
     }
     
+
+    @Override
+    public int compareTo(Professors o) {
+        
+        if (this.seniority == o.getSeniority())
+            return 0;
+
+        return 0;
+    }
 
     public float getWeeklyHours() {
         float totalHours = 0;

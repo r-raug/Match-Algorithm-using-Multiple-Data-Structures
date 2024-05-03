@@ -103,9 +103,11 @@ public class Queue<T extends Comparable<T>>{
      */
     public void resize() {
         int temp = size * 2;
+        int j=front;
         T[] tempQueue = Arrays.copyOf(queue, temp);
         for (int i = 0; i < size; i++) {
             tempQueue[i] = queue[(front + i) % queue.length];
+            //tempQueue[i] = queue[(j++) % queue.length];
         }
         queue = tempQueue;
         front = 0;
@@ -126,6 +128,7 @@ public class Queue<T extends Comparable<T>>{
                 i = (i + 1) % queue.length;
                 count++;
             }
+            System.out.println();
             System.out.println();
         }
     }
